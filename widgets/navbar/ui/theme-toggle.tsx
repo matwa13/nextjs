@@ -1,20 +1,26 @@
 'use client';
 import { MoonIcon, SunIcon } from '@/shared/ui';
 import cx from 'classnames';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 type Props = {
     className?: string;
 };
 
 export const ThemeToggle = ({ className }: Props) => {
-    const savedTheme = localStorage.getItem('theme');
-    const isDark =
-        savedTheme === 'dark' ||
-        (!savedTheme &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
-    const [isDarkMode, setIsDarkMode] = useState(isDark);
+    useEffect(() => {
+        if (typeof window === 'undefined') {
+            return;
+        }
+        const savedTheme = window.localStorage.getItem('theme');
+        const isDark =
+            savedTheme === 'dark' ||
+            (!savedTheme &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches);
+        setIsDarkMode(isDark);
+    }, []);
 
     const handleThemeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { checked } = e.target;
