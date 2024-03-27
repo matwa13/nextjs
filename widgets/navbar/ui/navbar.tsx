@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import { Route, ROUTES } from '@/entities/navigation';
+import { ThemeToggle } from '@/widgets/navbar/ui/theme-toggle';
 
 export const Navbar = (): ReactElement => {
     const renderNavItems = () => {
@@ -26,9 +27,10 @@ export const Navbar = (): ReactElement => {
                 </Link>
             </div>
             <div className="flex-none">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-4">
                     {renderNavItems()}
                 </ul>
+                <ThemeToggle />
             </div>
         </nav>
     );
