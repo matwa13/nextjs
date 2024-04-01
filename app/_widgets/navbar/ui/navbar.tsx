@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import Link from 'next/link';
-import { Route, ROUTES } from '@/entities/navigation';
-import { ThemeToggle } from '@/widgets/navbar/ui/theme-toggle';
+import { Route, ROUTES } from '@/_entities/navigation';
+import { ThemeToggle } from '@/_widgets/navbar/ui/theme-toggle';
 
 export const Navbar = (): ReactElement => {
     const renderNavItems = () => {

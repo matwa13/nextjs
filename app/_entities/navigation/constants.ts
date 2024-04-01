@@ -1,4 +1,4 @@
-import { TRoutes } from '@/entities/navigation/types';
+import { TRoutes } from '@/_entities/navigation/types';
 
 export enum Route {
     Home = 'Home',

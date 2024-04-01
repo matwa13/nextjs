@@ -1,4 +1,4 @@
-import { Route } from '@/entities/navigation/constants';
+import { Route } from '@/_entities/navigation/constants';
 
 export type TRoutes = Record<
     Route,

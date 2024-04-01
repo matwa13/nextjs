@@ -1,7 +1,7 @@
 'use client';
-import { MoonIcon, SunIcon } from '@/shared/ui';
 import cx from 'classnames';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { MoonIcon, SunIcon } from '@/_shared/ui';
 
 type Props = {
     className?: string;

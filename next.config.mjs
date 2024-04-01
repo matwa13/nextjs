@@ -2,7 +2,7 @@
 const nextConfig = (phase, { defaultConfig }) => {
     return {
         eslint: {
-            dirs: ['entities', 'app', 'pages', 'shared', 'widgets'],
+            dirs: ['app'],
         },
     };
 };
