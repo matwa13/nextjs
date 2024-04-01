@@ -1,7 +1,9 @@
+import { Heading } from '@/_shared/ui';
+
 export default function Home() {
     return (
         <>
-            <h1>Hallo World</h1>
+            <Heading>Hallo World</Heading>
         </>
     );
 }

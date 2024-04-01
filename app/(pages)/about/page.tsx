@@ -1,5 +1,5 @@
-import { About } from './ui';
+import { Heading } from '@/_shared/ui';
 
 export default function AboutPage() {
-    return <About />;
+    return <Heading>About</Heading>;
 }

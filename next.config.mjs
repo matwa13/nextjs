@@ -4,6 +4,16 @@ const nextConfig = (phase, { defaultConfig }) => {
         eslint: {
             dirs: ['app'],
         },
+        images: {
+            remotePatterns: [
+                {
+                    protocol: 'https',
+                    hostname: 'images.pexels.com',
+                    port: '',
+                    pathname: '/photos/**',
+                }
+            ]
+        }
     };
 };
 

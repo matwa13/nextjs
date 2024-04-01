@@ -6,7 +6,7 @@ import { ThemeToggle } from '@/_widgets/navbar/ui/theme-toggle';
 export const Navbar = (): ReactElement => {
     const renderNavItems = () => {
         return Object.entries(ROUTES).map(([route, config]) => {
-            if (route === Route.Home) {
+            if (route === Route.Home || config.shouldHideInNav) {
                 return null;
             }
             return (

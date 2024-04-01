@@ -1,9 +1,9 @@
 import { Route } from '@/_entities/navigation/constants';
 
-export type TRoutes = Record<
-    Route,
-    {
-        path: string;
-        label: string;
-    }
->;
+export type TRoute = {
+    path: string;
+    label: string;
+    shouldHideInNav?: boolean;
+};
+
+export type TRoutes = Record<Route, TRoute>;

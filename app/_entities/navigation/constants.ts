@@ -4,6 +4,8 @@ export enum Route {
     Home = 'Home',
     About = 'About',
     Contact = 'Contact',
+    Sandbox = 'Sandbox',
+    TodoList = 'TodoList',
 }
 
 export const ROUTES: TRoutes = {
@@ -18,5 +20,14 @@ export const ROUTES: TRoutes = {
     [Route.Contact]: {
         path: '/contact',
         label: 'Contact',
+    },
+    [Route.Sandbox]: {
+        path: '/sandbox',
+        label: 'Sandbox',
+    },
+    [Route.TodoList]: {
+        path: '/sandbox/todo-list',
+        label: 'Todo List',
+        shouldHideInNav: true,
     },
 };

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { ReactNode } from 'react';
+import { Breadcrumbs } from '@/_widgets/breadcrumbs';
 import { Navbar } from '@/_widgets/navbar';
 import '../globals.css';
-import { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <html lang="en">
             <body className={inter.className}>
                 <Navbar />
-                <main>{children}</main>
+                <main className="container mx-auto px-4">
+                    <Breadcrumbs />
+                    <div className="mt-2 md:mt-4">{children}</div>
+                </main>
             </body>
         </html>
     );
