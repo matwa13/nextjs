@@ -1,5 +1,9 @@
-import { Heading } from '@/_shared/ui';
+import { List } from './ui';
 
 export default function TodoListPage() {
-    return <Heading>TodoList</Heading>;
+    return (
+        <>
+            <List />
+        </>
+    );
 }
