@@ -19,7 +19,7 @@ const config: Config = {
     },
     plugins: [require('@tailwindcss/typography'), require('daisyui')],
     daisyui: {
-        themes: ['winter', 'dracula'],
+        themes: ['lemonade', 'dracula'],
         // darkTheme: 'dracula',
     },
 };
