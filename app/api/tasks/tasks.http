@@ -1,0 +1,31 @@
+### create a new task
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+Accept: application/json
+
+{
+  "content": "Test Task"
+}
+
+### Get all tasks
+GET http://localhost:3000/api/tasks
+Accept: application/json
+
+> {% client.global.set("task_id", response.body.data[0].id); %}
+
+### Get a task
+GET http://localhost:3000/api/tasks/{{task_id}}
+Accept: application/json
+
+
+### Update a task
+PUT http://localhost:3000/api/tasks
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "{{task_id}}",
+  "content": "Updated Task",
+  "completed": true
+}
+
