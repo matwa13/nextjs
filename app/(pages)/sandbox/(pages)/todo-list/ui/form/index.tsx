@@ -1,9 +1,23 @@
+'use client';
+
+import { useFormState } from 'react-dom';
 import { createTask } from '@/_entities/tasks/model/api';
-import { Input, SubmitButton } from '@/_shared/ui';
+import { Alert, Input, SubmitButton } from '@/_shared/ui';
+import { TCreateTaskResponse } from '@/_entities/tasks/types';
+
+const initialValues: TCreateTaskResponse = {
+    messages: [],
+    ok: true,
+};
 
 export const Form = () => {
+    const [state, formAction] = useFormState<TCreateTaskResponse, FormData>(
+        createTask,
+        initialValues,
+    );
+
     return (
-        <form action={createTask}>
+        <form action={formAction}>
             <div className="join w-full">
                 <Input
                     name="content"
@@ -14,6 +28,11 @@ export const Form = () => {
                     create task
                 </SubmitButton>
             </div>
+            {Boolean(state.messages.length) && (
+                <Alert type={state.ok ? 'success' : 'error'} className="mt-2">
+                    {state.messages.join(', ')}
+                </Alert>
+            )}
         </form>
     );
 };

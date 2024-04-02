@@ -3,19 +3,35 @@
 import { Task, Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { prisma } from '@/_shared/lib';
+import { formatErrors, prisma } from '@/_shared/lib';
 import { PATHS, Route } from '@/_entities/navigation';
+import { TCreateTaskResponse } from '@/_entities/tasks/types';
+import { validationSchema } from './validation';
 
-export const createTask = async (data: FormData) => {
+export const createTask = async (
+    prevData: TCreateTaskResponse,
+    data: FormData,
+): Promise<TCreateTaskResponse> => {
     const content = data.get('content') as Task['content'];
 
-    await prisma.task.create({
-        data: {
+    try {
+        validationSchema.task.parse({
             content,
-        },
-    });
+        });
+        await prisma.task.create({
+            data: {
+                content,
+            },
+        });
 
-    revalidatePath(PATHS[Route.TodoList]);
+        revalidatePath(PATHS[Route.TodoList]);
+        return {
+            messages: ['Task created'],
+            ok: true,
+        };
+    } catch (error) {
+        return formatErrors(error);
+    }
 };
 
 export const deleteTask = async (data: FormData) => {

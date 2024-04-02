@@ -17,7 +17,7 @@ export const List = async () => {
                 {tasks.map((task) => (
                     <li
                         key={task.id}
-                        className="join mb-4 w-full rounded-lg border border-base-300 bg-base-200 shadow-lg"
+                        className="join w-full rounded-lg border border-base-300 bg-base-200 shadow-lg"
                     >
                         <span
                             className={classnames(
