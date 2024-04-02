@@ -17,6 +17,18 @@ export const createTask = async (data: FormData) => {
     revalidatePath(PATHS[Route.TodoList]);
 };
 
+export const deleteTask = async (data: FormData) => {
+    const id = data.get('id') as Task['id'];
+
+    await prisma.task.delete({
+        where: {
+            id,
+        },
+    });
+
+    revalidatePath(PATHS[Route.TodoList]);
+};
+
 export const getTasks = async (orderBy: Prisma.SortOrder = 'desc') => {
     return prisma.task.findMany({
         orderBy: {

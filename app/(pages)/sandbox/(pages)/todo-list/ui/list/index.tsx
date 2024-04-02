@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import Link from 'next/link';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model/api';
+import { DeleteButton } from '../delete-button';
 
 export const List = async () => {
     const tasks = await getTasks();
@@ -19,23 +20,25 @@ export const List = async () => {
                 {tasks.map((task) => (
                     <li
                         key={task.id}
-                        className="mb-4 flex items-center justify-between rounded-lg border border-base-300 bg-base-200 px-6 py-4 shadow-lg"
+                        className="join mb-4 w-full rounded-lg border border-base-300 bg-base-200 shadow-lg"
                     >
                         <span
-                            className={classnames('text-lg capitalize', {
-                                'line-through': task.completed,
-                            })}
+                            className={classnames(
+                                'join-item w-full p-4 text-lg capitalize',
+                                {
+                                    'line-through': task.completed,
+                                },
+                            )}
                         >
                             {task.content}
                         </span>
-                        <div className="flex items-center gap-6">
-                            <Link
-                                href={`${PATHS[Route.TodoList]}/${task.id}`}
-                                className="btn btn-primary btn-md"
-                            >
-                                edit
-                            </Link>
-                        </div>
+                        <Link
+                            href={`${PATHS[Route.TodoList]}/${task.id}`}
+                            className="btn btn-primary join-item h-auto w-16"
+                        >
+                            edit
+                        </Link>
+                        <DeleteButton id={task.id} />
                     </li>
                 ))}
             </ul>
