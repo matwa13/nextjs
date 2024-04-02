@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
+import { Notifications } from '@/_entities/notifications';
 import { Breadcrumbs } from '@/_widgets/breadcrumbs';
 import { Navbar } from '@/_widgets/navbar';
 import '../globals.css';
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={inter.className}>
+                <Notifications />
                 <Navbar />
                 <main className="container mx-auto px-4">
                     <Breadcrumbs />

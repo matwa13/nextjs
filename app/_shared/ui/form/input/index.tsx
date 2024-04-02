@@ -11,7 +11,7 @@ export const Input = ({
     className,
     name,
     placeholder,
-    required = true,
+    required = false,
     ...otherProps
 }: Props): ReactElement => {
     return (

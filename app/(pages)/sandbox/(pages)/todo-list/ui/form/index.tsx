@@ -2,8 +2,10 @@
 
 import { useFormState } from 'react-dom';
 import { createTask } from '@/_entities/tasks/model/api';
-import { Alert, Input, SubmitButton } from '@/_shared/ui';
+import { Input, SubmitButton } from '@/_shared/ui';
 import { TCreateTaskResponse } from '@/_entities/tasks/types';
+import { useEffect } from 'react';
+import { notification } from '@/_entities/notifications';
 
 const initialValues: TCreateTaskResponse = {
     messages: [],
@@ -15,6 +17,16 @@ export const Form = () => {
         createTask,
         initialValues,
     );
+
+    useEffect(() => {
+        if (!state.messages.length) {
+            return;
+        }
+        if (!state.ok) {
+            return notification.error(state.messages);
+        }
+        notification.success(state.messages);
+    }, [state]);
 
     return (
         <form action={formAction}>
@@ -28,11 +40,6 @@ export const Form = () => {
                     create task
                 </SubmitButton>
             </div>
-            {Boolean(state.messages.length) && (
-                <Alert type={state.ok ? 'success' : 'error'} className="mt-2">
-                    {state.messages.join(', ')}
-                </Alert>
-            )}
         </form>
     );
 };
