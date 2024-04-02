@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import Link from 'next/link';
 import { PATHS, Route } from '@/_entities/navigation';
-import { getTasks } from '@/_entities/tasks/model/api';
+import { getTasks } from '@/_entities/tasks/model';
 import { Alert } from '@/_shared/ui';
 import { DeleteButton } from '../delete-button';
 

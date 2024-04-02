@@ -2,16 +2,15 @@
 
 import { Task, Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { formatErrors, prisma } from '@/_shared/lib';
 import { PATHS, Route } from '@/_entities/navigation';
-import { TCreateTaskResponse } from '@/_entities/tasks/types';
+import { formatErrors, prisma } from '@/_shared/lib';
+import { TResponse } from '@/_shared/types';
 import { validationSchema } from './validation';
 
 export const createTask = async (
-    prevData: TCreateTaskResponse,
+    prevData: TResponse,
     data: FormData,
-): Promise<TCreateTaskResponse> => {
+): Promise<TResponse> => {
     const content = data.get('content') as Task['content'];
 
     try {
@@ -34,16 +33,24 @@ export const createTask = async (
     }
 };
 
-export const deleteTask = async (data: FormData) => {
+export const deleteTask = async (prevState: TResponse, data: FormData) => {
     const id = data.get('id') as Task['id'];
 
-    await prisma.task.delete({
-        where: {
-            id,
-        },
-    });
+    try {
+        await prisma.task.delete({
+            where: {
+                id,
+            },
+        });
 
-    revalidatePath(PATHS[Route.TodoList]);
+        revalidatePath(PATHS[Route.TodoList]);
+        return {
+            messages: ['Task deleted'],
+            ok: true,
+        };
+    } catch (error) {
+        return formatErrors(error);
+    }
 };
 
 export const getTask = async (id: Task['id']) => {
@@ -54,22 +61,36 @@ export const getTask = async (id: Task['id']) => {
     });
 };
 
-export const updateTask = async (data: FormData) => {
+export const updateTask = async (prevState: TResponse, data: FormData) => {
     const id = data.get('id') as Task['id'];
     const content = data.get('content') as Task['content'];
     const completed = data.get('completed') === 'on';
 
-    await prisma.task.update({
-        where: {
-            id,
-        },
-        data: {
-            completed,
+    try {
+        validationSchema.task.parse({
             content,
-        },
-    });
+            completed,
+        });
 
-    redirect(PATHS[Route.TodoList]);
+        await prisma.task.update({
+            where: {
+                id,
+            },
+            data: {
+                completed,
+                content,
+            },
+        });
+        // redirect does not work in server actions https://github.com/vercel/next.js/issues/58263
+        // redirect(PATHS[Route.TodoList]);
+        revalidatePath(PATHS[Route.TodoList]);
+        return {
+            messages: ['Task updated'],
+            ok: true,
+        };
+    } catch (error) {
+        return formatErrors(error);
+    }
 };
 
 export const getTasks = async (orderBy: Prisma.SortOrder = 'desc') => {

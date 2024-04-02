@@ -1,2 +1,2 @@
-export { notification } from './lib';
+export { notification, useFormNotifications } from './lib';
 export { Notifications } from './ui';

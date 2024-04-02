@@ -1,12 +1,35 @@
-import { getTask, updateTask } from '@/_entities/tasks/model/api';
+'use client';
+
+import { Task } from '@prisma/client';
+import { useFormState } from 'react-dom';
+import { useFormNotifications } from '@/_entities/notifications';
+import { updateTask } from '@/_entities/tasks/model';
+import { TResponse } from '@/_shared/types';
 import { Alert, Checkbox, Input, SubmitButton } from '@/_shared/ui';
+import { redirect } from 'next/navigation';
+import { PATHS, Route } from '@/_entities/navigation';
 
 type Props = {
-    id: string;
+    task: Task | null;
 };
 
-export const Form = async ({ id }: Props) => {
-    const task = await getTask(id);
+const initialValues: TResponse = {
+    messages: [],
+    ok: true,
+};
+
+export const Form = ({ task }: Props) => {
+    const [state, formAction] = useFormState<TResponse, FormData>(
+        updateTask,
+        initialValues,
+    );
+
+    useFormNotifications(state, {
+        onSuccess: () => {
+            // redirect does not work in server actions https://github.com/vercel/next.js/issues/58263
+            redirect(PATHS[Route.TodoList]);
+        },
+    });
 
     if (!task) {
         return <Alert type="info">Task not found</Alert>;
@@ -14,7 +37,7 @@ export const Form = async ({ id }: Props) => {
 
     return (
         <div className="mt-4">
-            <form action={updateTask}>
+            <form action={formAction}>
                 <Input
                     defaultValue={task.content}
                     name="content"

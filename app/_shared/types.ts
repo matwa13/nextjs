@@ -1,4 +1,4 @@
-export type TCreateTaskResponse = {
+export type TResponse = {
     messages: string[];
     ok: boolean;
 };

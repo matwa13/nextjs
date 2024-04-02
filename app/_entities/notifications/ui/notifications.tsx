@@ -10,7 +10,6 @@ export const Notifications = () => {
     return (
         <>
             {toasts.map((toast, index) => {
-                console.log(toast);
                 const offset = calculateOffset(toast, {
                     reverseOrder: false,
                 });
