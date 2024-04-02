@@ -2,17 +2,14 @@ import classnames from 'classnames';
 import Link from 'next/link';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model/api';
+import { Alert } from '@/_shared/ui';
 import { DeleteButton } from '../delete-button';
 
 export const List = async () => {
     const tasks = await getTasks();
     const renderContent = () => {
         if (!tasks.length) {
-            return (
-                <div className="text-center text-lg font-medium">
-                    No tasks to show
-                </div>
-            );
+            return <Alert type="info">No tasks found</Alert>;
         }
 
         return (

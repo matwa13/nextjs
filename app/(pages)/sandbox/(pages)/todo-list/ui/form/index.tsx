@@ -1,17 +1,14 @@
 import { createTask } from '@/_entities/tasks/model/api';
-import { SubmitButton } from '@/_shared/ui';
+import { Input, SubmitButton } from '@/_shared/ui';
 
 export const Form = () => {
     return (
         <form action={createTask}>
             <div className="join w-full">
-                <input
-                    className="input join-item input-bordered w-full"
-                    placeholder="Add new task"
-                    type="text"
+                <Input
                     name="content"
-                    required
-                    autoComplete={'off'}
+                    placeholder="Add new task"
+                    className="join-item"
                 />
                 <SubmitButton className="join-item min-w-40">
                     create task

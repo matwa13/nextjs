@@ -1,7 +1,7 @@
 'use client';
 import cx from 'classnames';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { MoonIcon, SunIcon } from '@/_shared/ui';
+import { Icons } from '@/_shared/ui';
 
 type Props = {
     className?: string;
@@ -37,8 +37,8 @@ export const ThemeToggle = ({ className }: Props) => {
                 checked={isDarkMode}
                 onChange={handleThemeChange}
             />
-            <SunIcon className="swap-off h-10 w-10 fill-current" />
-            <MoonIcon className="swap-on h-10 w-10 fill-current" />
+            <Icons.Sun className="swap-off h-10 w-10 fill-current" />
+            <Icons.Moon className="swap-on h-10 w-10 fill-current" />
         </label>
     );
 };

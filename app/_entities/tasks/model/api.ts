@@ -2,6 +2,7 @@
 
 import { Task, Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { prisma } from '@/_shared/lib';
 import { PATHS, Route } from '@/_entities/navigation';
 
@@ -27,6 +28,32 @@ export const deleteTask = async (data: FormData) => {
     });
 
     revalidatePath(PATHS[Route.TodoList]);
+};
+
+export const getTask = async (id: Task['id']) => {
+    return prisma.task.findUnique({
+        where: {
+            id,
+        },
+    });
+};
+
+export const updateTask = async (data: FormData) => {
+    const id = data.get('id') as Task['id'];
+    const content = data.get('content') as Task['content'];
+    const completed = data.get('completed') === 'on';
+
+    await prisma.task.update({
+        where: {
+            id,
+        },
+        data: {
+            completed,
+            content,
+        },
+    });
+
+    redirect(PATHS[Route.TodoList]);
 };
 
 export const getTasks = async (orderBy: Prisma.SortOrder = 'desc') => {
