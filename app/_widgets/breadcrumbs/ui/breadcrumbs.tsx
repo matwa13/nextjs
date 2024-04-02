@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import { Route, ROUTES } from '@/_entities/navigation';
+import { PATHS, Route, ROUTES } from '@/_entities/navigation';
 
 export const Breadcrumbs = () => {
     const pathname = usePathname();
@@ -44,7 +44,7 @@ export const Breadcrumbs = () => {
         <div className="breadcrumbs text-sm">
             <ul>
                 <li>
-                    <Link href={ROUTES[Route.Home].path}>
+                    <Link href={PATHS[Route.Home]}>
                         {ROUTES[Route.Home].label}
                     </Link>
                 </li>

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import Link from 'next/link';
-import { Route, ROUTES } from '@/_entities/navigation';
+import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model/api';
 
 export const List = async () => {
@@ -30,7 +30,7 @@ export const List = async () => {
                         </span>
                         <div className="flex items-center gap-6">
                             <Link
-                                href={`${ROUTES[Route.TodoList].path}/${task.id}`}
+                                href={`${PATHS[Route.TodoList]}/${task.id}`}
                                 className="btn btn-primary btn-md"
                             >
                                 edit
@@ -42,5 +42,5 @@ export const List = async () => {
         );
     };
 
-    return <div className="mx-auto max-w-md">{renderContent()}</div>;
+    return <div className="mt-4">{renderContent()}</div>;
 };

@@ -1,7 +1,7 @@
-import { Route } from '@/_entities/navigation/constants';
+import { PATHS, Route } from '@/_entities/navigation/constants';
 
 export type TRoute = {
-    path: string;
+    path: (typeof PATHS)[keyof typeof PATHS];
     label: string;
     shouldHideInNav?: boolean;
 };

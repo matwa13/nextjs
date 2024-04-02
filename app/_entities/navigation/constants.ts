@@ -8,25 +8,33 @@ export enum Route {
     TodoList = 'TodoList',
 }
 
+export const PATHS: Record<Route, string> = {
+    [Route.Home]: '/',
+    [Route.About]: '/about',
+    [Route.Contact]: '/contact',
+    [Route.Sandbox]: '/sandbox',
+    [Route.TodoList]: '/sandbox/todo-list',
+};
+
 export const ROUTES: TRoutes = {
     [Route.Home]: {
-        path: '/',
+        path: PATHS[Route.Home],
         label: 'Home',
     },
     [Route.About]: {
-        path: '/about',
+        path: PATHS[Route.About],
         label: 'About',
     },
     [Route.Contact]: {
-        path: '/contact',
+        path: PATHS[Route.Contact],
         label: 'Contact',
     },
     [Route.Sandbox]: {
-        path: '/sandbox',
+        path: PATHS[Route.Sandbox],
         label: 'Sandbox',
     },
     [Route.TodoList]: {
-        path: '/sandbox/todo-list',
+        path: PATHS[Route.TodoList],
         label: 'Todo List',
         shouldHideInNav: true,
     },
