@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import { Route, ROUTES } from '@/_entities/navigation';
-import { ThemeToggle } from '@/_widgets/navbar/ui/theme-toggle';
 import { Icons } from '@/_shared/ui';
+import { ThemeToggle } from './theme-toggle';
+import { UserProfile } from './user-profile';
 
 export const Navbar = (): ReactElement => {
     const renderNavItems = () => {
@@ -37,6 +38,7 @@ export const Navbar = (): ReactElement => {
                         {renderNavItems()}
                     </ul>
                     <ThemeToggle />
+                    <UserProfile />
                 </div>
             </nav>
         </header>
