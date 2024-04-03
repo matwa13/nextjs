@@ -37,8 +37,8 @@ export const ThemeToggle = ({ className }: Props) => {
                 checked={isDarkMode}
                 onChange={handleThemeChange}
             />
-            <Icons.Sun className="swap-off h-10 w-10 fill-current" />
-            <Icons.Moon className="swap-on h-10 w-10 fill-current" />
+            <Icons.Sun className="swap-off h-8 w-8 fill-current" />
+            <Icons.Moon className="swap-on h-8 w-8 fill-current" />
         </label>
     );
 };
