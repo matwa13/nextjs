@@ -49,6 +49,7 @@ export const Form = ({ task }: Props) => {
                     label="Completed"
                 />
                 <input type="hidden" value={task.id} name="id" />
+                <input type="hidden" value={task.creatorId} name="creatorId" />
                 <SubmitButton className="mt-4 w-full">Save</SubmitButton>
             </form>
         </div>

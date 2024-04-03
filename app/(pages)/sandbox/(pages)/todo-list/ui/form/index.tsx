@@ -5,6 +5,10 @@ import { createTask } from '@/_entities/tasks/model';
 import { Input, SubmitButton } from '@/_shared/ui';
 import { useFormNotifications } from '@/_entities/notifications';
 import { TResponse } from '@/_shared/types';
+import { useAuth } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
+import { PATHS, Route } from '@/_entities/navigation';
+import { useEffect } from 'react';
 
 const initialValues: TResponse = {
     messages: [],
@@ -16,8 +20,19 @@ export const Form = () => {
         createTask,
         initialValues,
     );
+    const { userId } = useAuth();
 
     useFormNotifications(state);
+
+    useEffect(() => {
+        if (!userId) {
+            redirect(PATHS[Route.SignIn]);
+        }
+    }, [userId]);
+
+    if (!userId) {
+        return null;
+    }
 
     return (
         <form action={formAction}>
@@ -27,6 +42,7 @@ export const Form = () => {
                     placeholder="Add new task"
                     className="join-item"
                 />
+                <input type="hidden" name="creatorId" value={userId} />
                 <SubmitButton className="join-item min-w-40">
                     create task
                 </SubmitButton>

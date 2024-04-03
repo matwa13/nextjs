@@ -1,12 +1,18 @@
+import { auth } from '@clerk/nextjs';
 import classnames from 'classnames';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model';
 import { Alert } from '@/_shared/ui';
 import { DeleteButton } from '../delete-button';
 
 export const List = async () => {
-    const tasks = await getTasks();
+    const { userId } = auth();
+    if (!userId) {
+        redirect(PATHS[Route.SignIn]);
+    }
+    const tasks = await getTasks(userId);
     const renderContent = () => {
         if (!tasks.length) {
             return <Alert type="info">No tasks found</Alert>;

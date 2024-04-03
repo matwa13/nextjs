@@ -12,14 +12,17 @@ export const createTask = async (
     data: FormData,
 ): Promise<TResponse> => {
     const content = data.get('content') as Task['content'];
+    const creatorId = data.get('creatorId') as Task['creatorId'];
 
     try {
         validationSchema.task.parse({
             content,
+            creatorId,
         });
         await prisma.task.create({
             data: {
                 content,
+                creatorId,
             },
         });
 
@@ -53,10 +56,11 @@ export const deleteTask = async (prevState: TResponse, data: FormData) => {
     }
 };
 
-export const getTask = async (id: Task['id']) => {
+export const getTask = async (id: Task['id'], creatorId: Task['creatorId']) => {
     return prisma.task.findUnique({
         where: {
             id,
+            creatorId,
         },
     });
 };
@@ -65,16 +69,19 @@ export const updateTask = async (prevState: TResponse, data: FormData) => {
     const id = data.get('id') as Task['id'];
     const content = data.get('content') as Task['content'];
     const completed = data.get('completed') === 'on';
+    const creatorId = data.get('creatorId') as Task['creatorId'];
 
     try {
         validationSchema.task.parse({
             content,
             completed,
+            creatorId,
         });
 
         await prisma.task.update({
             where: {
                 id,
+                creatorId,
             },
             data: {
                 completed,
@@ -93,8 +100,14 @@ export const updateTask = async (prevState: TResponse, data: FormData) => {
     }
 };
 
-export const getTasks = async (orderBy: Prisma.SortOrder = 'desc') => {
+export const getTasks = async (
+    userId: Task['creatorId'],
+    orderBy: Prisma.SortOrder = 'desc',
+) => {
     return prisma.task.findMany({
+        where: {
+            creatorId: userId,
+        },
         orderBy: {
             createdAt: orderBy,
         },
