@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Notifications } from '@/_entities/notifications';
 import { Breadcrumbs } from '@/_widgets/breadcrumbs';
+import { Footer } from '@/_widgets/footer';
 import { Navbar } from '@/_widgets/navbar';
 import '../globals.css';
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         {children}
                     </div>
                 </main>
+                <Footer />
             </body>
         </html>
     );
