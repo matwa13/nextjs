@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model';
 import { Alert } from '@/_shared/ui';
-import { DeleteButton } from '../delete-button';
+import { DeleteButton } from './delete-button';
 
 export const List = async () => {
     const { userId } = auth();

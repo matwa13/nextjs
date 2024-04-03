@@ -1,5 +1,5 @@
 import { Heading } from '@/_shared/ui';
-import { TRoute, TRoutes } from '@/_entities/navigation';
+import { TRoute } from '@/_entities/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 

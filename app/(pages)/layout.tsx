@@ -32,9 +32,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         <Notifications />
                         <Navbar />
                         <main className="grid flex-1 overflow-y-auto">
-                            <div className="container mx-auto p-4">
+                            <div className="container mx-auto flex flex-col p-4">
                                 <Breadcrumbs />
-                                {children}
+                                <div className="flex-1">{children}</div>
                             </div>
                         </main>
                         <Footer />
