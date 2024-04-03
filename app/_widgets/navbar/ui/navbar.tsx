@@ -20,18 +20,23 @@ export const Navbar = (): ReactElement => {
     const homeRoute = ROUTES[Route.Home];
 
     return (
-        <nav className="navbar bg-base-100">
-            <div className="flex-1">
-                <Link className="btn btn-ghost text-xl" href={homeRoute.path}>
-                    {homeRoute.label}
-                </Link>
-            </div>
-            <div className="flex-none">
-                <ul className="menu menu-horizontal px-4">
-                    {renderNavItems()}
-                </ul>
-                <ThemeToggle />
-            </div>
-        </nav>
+        <header>
+            <nav className="navbar bg-base-100">
+                <div className="flex-1">
+                    <Link
+                        className="btn btn-ghost text-xl"
+                        href={homeRoute.path}
+                    >
+                        {homeRoute.label}
+                    </Link>
+                </div>
+                <div className="flex-none">
+                    <ul className="menu menu-horizontal px-4">
+                        {renderNavItems()}
+                    </ul>
+                    <ThemeToggle />
+                </div>
+            </nav>
+        </header>
     );
 };

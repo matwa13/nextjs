@@ -21,6 +21,10 @@ export const ROUTES: TRoutes = {
         path: PATHS[Route.Home],
         label: 'Home',
     },
+    [Route.Sandbox]: {
+        path: PATHS[Route.Sandbox],
+        label: 'Sandbox',
+    },
     [Route.About]: {
         path: PATHS[Route.About],
         label: 'About',
@@ -28,10 +32,6 @@ export const ROUTES: TRoutes = {
     [Route.Contact]: {
         path: PATHS[Route.Contact],
         label: 'Contact',
-    },
-    [Route.Sandbox]: {
-        path: PATHS[Route.Sandbox],
-        label: 'Sandbox',
     },
     [Route.TodoList]: {
         path: PATHS[Route.TodoList],
