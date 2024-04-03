@@ -22,7 +22,10 @@ export const Providers = ({ children }: { children: ReactNode }) => {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 {children}
-                <ReactQueryDevtools initialIsOpen={false} />
+                <ReactQueryDevtools
+                    initialIsOpen={false}
+                    buttonPosition="bottom-left"
+                />
             </ThemeProvider>
         </QueryClientProvider>
     );

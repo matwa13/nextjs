@@ -18,6 +18,7 @@ export const Form = ({ onSubmit }: Props) => {
         setValue(event.target.value);
     };
 
+    const isDisabled = !value.trim().length;
     return (
         <form onSubmit={handleSubmit} className="w-full pt-8">
             <div className="join w-full">
@@ -27,7 +28,9 @@ export const Form = ({ onSubmit }: Props) => {
                     className="join-item"
                     onChange={handleChange}
                 />
-                <SubmitButton className="join-item">ask question</SubmitButton>
+                <SubmitButton className="join-item" disabled={isDisabled}>
+                    ask question
+                </SubmitButton>
             </div>
         </form>
     );
