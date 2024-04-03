@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
+import { Providers } from '@/providers';
 import { Notifications } from '@/_entities/notifications';
-import { ThemeProvider } from '@/_entities/theme';
 import { Breadcrumbs } from '@/_widgets/breadcrumbs';
 import { Footer } from '@/_widgets/footer';
 import { Navbar } from '@/_widgets/navbar';
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         'flex h-screen flex-col',
                     )}
                 >
-                    <ThemeProvider>
+                    <Providers>
                         <Notifications />
                         <Navbar />
                         <main className="grid flex-1 overflow-y-auto">
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                             </div>
                         </main>
                         <Footer />
-                    </ThemeProvider>
+                    </Providers>
                 </body>
             </html>
         </ClerkProvider>

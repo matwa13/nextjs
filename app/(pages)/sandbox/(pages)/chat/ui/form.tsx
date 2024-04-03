@@ -1,11 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Input, SubmitButton } from '@/_shared/ui';
 
-export const Form = () => {
+type Props = {
+    onSubmit: (message: string) => void;
+};
+
+export const Form = ({ onSubmit }: Props) => {
     const [value, setValue] = useState('');
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        onSubmit(value);
+        setValue('');
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

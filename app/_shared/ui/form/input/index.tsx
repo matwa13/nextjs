@@ -7,7 +7,6 @@ type Props = Omit<
 >;
 
 export const Input = ({
-    defaultValue = '',
     className,
     name,
     placeholder,
@@ -19,7 +18,6 @@ export const Input = ({
             type="text"
             name={name}
             id={name}
-            defaultValue={defaultValue}
             className={classnames('input input-primary w-full', className)}
             placeholder={placeholder}
             required={required}
