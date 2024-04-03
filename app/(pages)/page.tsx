@@ -35,7 +35,7 @@ export default function Home() {
                         href={PATHS[Route.Sandbox]}
                         className="btn btn-primary btn-lg"
                     >
-                        Get Started
+                        Click to Explore
                     </Link>
                 </div>
             </div>

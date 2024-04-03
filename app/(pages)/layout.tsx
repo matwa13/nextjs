@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import classnames from 'classnames';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -18,23 +19,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body
-                className={classnames(
-                    inter.className,
-                    'flex h-screen flex-col',
-                )}
-            >
-                <Notifications />
-                <Navbar />
-                <main className="grid flex-1 overflow-y-auto">
-                    <div className="container mx-auto p-4">
-                        <Breadcrumbs />
-                        {children}
-                    </div>
-                </main>
-                <Footer />
-            </body>
-        </html>
+        <ClerkProvider>
+            <html lang="en" suppressHydrationWarning>
+                <body
+                    className={classnames(
+                        inter.className,
+                        'flex h-screen flex-col',
+                    )}
+                >
+                    <Notifications />
+                    <Navbar />
+                    <main className="grid flex-1 overflow-y-auto">
+                        <div className="container mx-auto p-4">
+                            <Breadcrumbs />
+                            {children}
+                        </div>
+                    </main>
+                    <Footer />
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
