@@ -4,17 +4,21 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "content": "Test Task"
+  "content": "Test Task",
+  "creatorId": "1"
 }
 
 ### Get all tasks
 GET http://localhost:3000/api/tasks
 Accept: application/json
 
-> {% client.global.set("task_id", response.body.data[0].id); %}
+> {%
+    client.global.set("task_id", response.body.data[0].id);
+    client.global.set("creator_id", response.body.data[0].creatorId);
+%}
 
 ### Get a task
-GET http://localhost:3000/api/tasks/{{task_id}}
+GET http://localhost:3000/api/tasks/{{task_id}}?creatorId={{creator_id}}
 Accept: application/json
 
 

@@ -12,6 +12,7 @@ export const POST = async (request: Request) => {
     const task = await db.task.create({
         data: {
             content: data.content,
+            creatorId: data.creatorId,
         },
     });
     return NextResponse.json({ data: task });
