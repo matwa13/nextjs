@@ -22,7 +22,6 @@ export const generateChatResponse = async (messages: Array<TChatQuery>) => {
         console.log(response);
         return response.choices[0].message;
     } catch (error) {
-        console.error(error);
-        return null;
+        throw new Error('Failed to generate chat response');
     }
 };

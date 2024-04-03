@@ -26,10 +26,12 @@ export const Chat = () => {
         mutate(query, {
             onSuccess: (data) => {
                 if (!data) {
-                    notification.error(['Something went wrong']);
                     return;
                 }
                 addMessage(data);
+            },
+            onError: () => {
+                notification.error(['Something went wrong!!!']);
             },
         });
     };
