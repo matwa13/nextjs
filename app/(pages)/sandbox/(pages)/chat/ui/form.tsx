@@ -1,11 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { Input, SubmitButton } from '@/_shared/ui';
+import { Icons, Input, SubmitButton } from '@/_shared/ui';
 
 type Props = {
     onSubmit: (message: string) => void;
+    isLoading: boolean;
 };
 
-export const Form = ({ onSubmit }: Props) => {
+export const Form = ({ isLoading, onSubmit }: Props) => {
     const [value, setValue] = useState('');
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -18,7 +19,7 @@ export const Form = ({ onSubmit }: Props) => {
         setValue(event.target.value);
     };
 
-    const isDisabled = !value.trim().length;
+    const isDisabled = !value.trim().length || isLoading;
     return (
         <form onSubmit={handleSubmit} className="w-full pt-8">
             <div className="join w-full">
@@ -29,7 +30,7 @@ export const Form = ({ onSubmit }: Props) => {
                     onChange={handleChange}
                 />
                 <SubmitButton className="join-item" disabled={isDisabled}>
-                    ask question
+                    <Icons.PaperAirplane className="h-10 w-10 -rotate-90" />
                 </SubmitButton>
             </div>
         </form>

@@ -11,7 +11,7 @@ import { notification } from '@/_entities/notifications';
 export const Chat = () => {
     const [messages, setMessages] = useState<TChatQuery[]>([]);
 
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: (query: TChatQuery) =>
             generateChatResponse([...messages, query]),
     });
@@ -38,8 +38,8 @@ export const Chat = () => {
 
     return (
         <>
-            <Messages messages={messages} />
-            <Form onSubmit={handleSubmit} />
+            <Messages messages={messages} isLoading={isPending} />
+            <Form onSubmit={handleSubmit} isLoading={isPending} />
         </>
     );
 };
