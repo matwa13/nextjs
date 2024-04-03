@@ -15,7 +15,10 @@ export const Breadcrumbs = () => {
         });
     }, [pathname]);
 
-    if (!routes.length) {
+    if (
+        !routes.length ||
+        [PATHS[Route.SignIn], PATHS[Route.SignUp]].includes(routes[0])
+    ) {
         return null;
     }
 

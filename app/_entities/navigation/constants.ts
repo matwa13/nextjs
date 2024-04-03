@@ -6,6 +6,8 @@ export enum Route {
     Contact = 'Contact',
     Sandbox = 'Sandbox',
     TodoList = 'TodoList',
+    SignIn = 'SignIn',
+    SignUp = 'SignUp',
 }
 
 export const PATHS: Record<Route, string> = {
@@ -14,6 +16,8 @@ export const PATHS: Record<Route, string> = {
     [Route.Contact]: '/contact',
     [Route.Sandbox]: '/sandbox',
     [Route.TodoList]: '/sandbox/todo-list',
+    [Route.SignIn]: '/sign-in',
+    [Route.SignUp]: '/sign-up',
 };
 
 export const ROUTES: TRoutes = {
@@ -36,6 +40,16 @@ export const ROUTES: TRoutes = {
     [Route.TodoList]: {
         path: PATHS[Route.TodoList],
         label: 'Todo List',
+        shouldHideInNav: true,
+    },
+    [Route.SignIn]: {
+        path: PATHS[Route.SignIn],
+        label: 'Sign In',
+        shouldHideInNav: true,
+    },
+    [Route.SignUp]: {
+        path: PATHS[Route.SignUp],
+        label: 'Sign Up',
         shouldHideInNav: true,
     },
 };
