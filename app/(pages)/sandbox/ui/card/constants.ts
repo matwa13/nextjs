@@ -13,4 +13,9 @@ export const cards: ComponentProps<typeof Card>[] = [
         description: 'Chat with MaxGPT!',
         route: ROUTES[Route.Chat],
     },
+    {
+        src: 'https://images.pexels.com/photos/160846/french-bulldog-summer-smile-joy-160846.jpeg',
+        description: 'Dogs Guide!',
+        route: ROUTES[Route.Dogs],
+    },
 ];

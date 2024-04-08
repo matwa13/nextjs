@@ -1,0 +1,1 @@
+export { Dogs } from './dogs';

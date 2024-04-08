@@ -7,6 +7,7 @@ export enum Route {
     Sandbox = 'Sandbox',
     TodoList = 'TodoList',
     Chat = 'Chat',
+    Dogs = 'Dogs',
     SignIn = 'SignIn',
     SignUp = 'SignUp',
 }
@@ -18,6 +19,7 @@ export const PATHS: Record<Route, string> = {
     [Route.Sandbox]: '/sandbox',
     [Route.TodoList]: '/sandbox/todo-list',
     [Route.Chat]: '/sandbox/chat',
+    [Route.Dogs]: '/sandbox/dogs',
     [Route.SignIn]: '/sign-in',
     [Route.SignUp]: '/sign-up',
 };
@@ -47,6 +49,11 @@ export const ROUTES: TRoutes = {
     [Route.Chat]: {
         path: PATHS[Route.Chat],
         label: 'MaxGPT',
+        shouldHideInNav: true,
+    },
+    [Route.Dogs]: {
+        path: PATHS[Route.Dogs],
+        label: 'Dogs',
         shouldHideInNav: true,
     },
     [Route.SignIn]: {
