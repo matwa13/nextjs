@@ -17,9 +17,6 @@ export const generateChatResponse = async (messages: Array<TChatQuery>) => {
             model: 'gpt-3.5-turbo',
             temperature: 0,
         });
-        console.log(messages);
-        console.log(response.choices[0].message);
-        console.log(response);
         return response.choices[0].message;
     } catch (error) {
         throw new Error('Failed to generate chat response');
