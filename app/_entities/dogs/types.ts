@@ -3,6 +3,7 @@ export type TDog = {
     traits: string[];
     description: string;
     history: string;
+    origin: string;
     height: {
         males: string;
         females: string;

@@ -32,7 +32,7 @@ export const SearchForm = ({ onSubmit, isLoading }: Props) => {
                     className="join-item min-w-40"
                     disabled={isLoading}
                 >
-                    Find Dog
+                    Ask AI for breed info
                 </SubmitButton>
             </div>
         </form>

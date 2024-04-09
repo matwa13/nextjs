@@ -20,12 +20,14 @@ export const generateBreedResponse = async (
 
         const { breed } = values;
 
-        const query = `Find an information about exact dog's ${breed}. If ${breed} exist, create a dog breed description.
-        Once you have the description, create a response that should be in the following JSON format: 
+        const query = `Detect the language of the query. Find an information about exact dog's ${breed}. Try to guess what breed user means and correct user's typos if needed. If ${breed} exist, create a dog breed description in user's language.
+        Once you have the description, create a response that should be in the following JSON format and in user's language: 
         {
           "dog": {
-            "breed": "${breed}",
-            "traits": ["trait1", "trait2", "trait3"],
+            "language": "user query language",
+            "breedEng": "correct ${breed} in English",
+            "breed": "correct ${breed} in user's language",
+            "traits": ["trait1", "trait2", "trait3"] in user's language,
             "description": "short description of the breed",
             "history": "history of the breed",
             "origin": "origin of the ${breed} (country)"
