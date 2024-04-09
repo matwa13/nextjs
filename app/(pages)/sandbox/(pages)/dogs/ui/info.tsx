@@ -1,5 +1,5 @@
 import { TDog } from '@/_entities/dogs/types';
-import { Heading } from '@/_shared/ui';
+import { Heading, Loader } from '@/_shared/ui';
 
 type Props = {
     isLoading?: boolean;
@@ -8,9 +8,7 @@ type Props = {
 
 export const Info = ({ data, isLoading }: Props) => {
     if (isLoading) {
-        return (
-            <span className="loading loading-spinner loading-lg mx-auto my-4"></span>
-        );
+        return <Loader size="lg" className="mx-auto my-4" />;
     }
 
     if (!data) {

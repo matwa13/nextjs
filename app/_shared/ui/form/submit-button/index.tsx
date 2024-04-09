@@ -1,8 +1,9 @@
 'use client';
 
 import classnames from 'classnames';
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { useFormStatus } from 'react-dom';
+import { Loader } from '@/_shared/ui';
 
 type Props = Omit<InputHTMLAttributes<HTMLButtonElement>, 'type'>;
 
@@ -21,11 +22,7 @@ export const SubmitButton = ({
             className={classnames('btn btn-primary', className)}
             {...otherProps}
         >
-            {isPending ? (
-                <span className="loading loading-dots loading-sm"></span>
-            ) : (
-                children
-            )}
+            {isPending ? <Loader size="sm" type="dots" /> : children}
         </button>
     );
 };

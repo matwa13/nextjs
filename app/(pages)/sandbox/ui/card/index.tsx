@@ -5,12 +5,13 @@ import Image from 'next/image';
 
 type Props = {
     src: string;
+    title: string;
     description?: string;
     route: TRoute;
 };
 
-export const Card = ({ src, description, route }: Props) => {
-    const { label: title, path } = route;
+export const Card = ({ src, title, description, route }: Props) => {
+    const { label, path } = route;
     return (
         <div className="card image-full w-full bg-base-100 shadow-xl">
             <figure className="relative">
@@ -19,17 +20,17 @@ export const Card = ({ src, description, route }: Props) => {
                     alt={title}
                     fill
                     priority
-                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
             </figure>
-            <div className="card-body">
+            <div className="card-body justify-between">
                 <Heading tag="h2" className="card-title">
                     {title}
                 </Heading>
                 {Boolean(description) && <p>{description}</p>}
                 <div className="card-actions justify-end">
                     <Link href={path} className="btn btn-primary">
-                        {title}
+                        {label}
                     </Link>
                 </div>
             </div>

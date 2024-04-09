@@ -4,6 +4,7 @@ import { Route, ROUTES } from '@/_entities/navigation';
 import { Icons } from '@/_shared/ui';
 import { ThemeToggle } from './theme-toggle';
 import { UserProfile } from './user-profile';
+import { Breadcrumbs } from '@/_widgets/breadcrumbs';
 
 export const Navbar = (): ReactElement => {
     const renderNavItems = () => {
@@ -41,6 +42,9 @@ export const Navbar = (): ReactElement => {
                     <UserProfile />
                 </div>
             </nav>
+            <div className="container mx-auto">
+                <Breadcrumbs />
+            </div>
         </header>
     );
 };

@@ -1,7 +1,9 @@
-import { TChatQuery } from '@/_entities/chat/types';
 import classnames from 'classnames';
+import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
-import { BotAvatar } from '@/(pages)/sandbox/(pages)/chat/ui/bot-avatar';
+import { TChatQuery } from '@/_entities/chat/types';
+import { Loader } from '@/_shared/ui';
+import { BotAvatar } from './bot-avatar';
 
 type Props = {
     isLoading: boolean;
@@ -36,8 +38,13 @@ export const Messages = ({ isLoading, messages }: Props) => {
                 >
                     <div className="avatar chat-image">
                         <div className="w-10 rounded-full">
-                            {isUser ? (
-                                <img alt={fullName} src={userAvatar} />
+                            {isUser && userAvatar ? (
+                                <Image
+                                    src={userAvatar}
+                                    alt={fullName}
+                                    width={40}
+                                    height={40}
+                                />
                             ) : (
                                 <BotAvatar />
                             )}
@@ -51,11 +58,7 @@ export const Messages = ({ isLoading, messages }: Props) => {
                             textColor,
                         )}
                     >
-                        {isBotTyping ? (
-                            <span className="loading loading-dots loading-md" />
-                        ) : (
-                            content
-                        )}
+                        {isBotTyping ? <Loader type="dots" /> : content}
                     </div>
                 </div>
             );

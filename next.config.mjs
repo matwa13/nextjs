@@ -11,6 +11,12 @@ const nextConfig = (phase, { defaultConfig }) => {
                     hostname: 'images.pexels.com',
                     port: '',
                     pathname: '/photos/**',
+                },
+                {
+                    protocol: 'https',
+                    hostname: 'img.clerk.com',
+                    port: '',
+                    pathname: '/**',
                 }
             ]
         }
