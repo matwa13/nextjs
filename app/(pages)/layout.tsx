@@ -5,7 +5,6 @@ import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Providers } from '@/providers';
 import { Notifications } from '@/_entities/notifications';
-import { Breadcrumbs } from '@/_widgets/breadcrumbs';
 import { Footer } from '@/_widgets/footer';
 import { Navbar } from '@/_widgets/navbar';
 import '../globals.css';
