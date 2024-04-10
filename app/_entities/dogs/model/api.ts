@@ -1,19 +1,40 @@
 'use server';
 
-import { TDog, TNewDogPayload, TNewDogResponse } from '@/_entities/dogs/types';
-import { formatErrors } from '@/_shared/lib';
+import { Prisma } from '@prisma/client';
+import {
+    TCreateBreedPayload,
+    TDog,
+    TGenerateBreedPayload,
+    TGenerateBreedResponse,
+    TGetBreedPayload,
+} from '@/_entities/dogs/types';
+import { formatErrors, prisma } from '@/_shared/lib';
 import { validationSchema } from './validation';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-export const getExistingBreed = async ({ breed }: TNewDogPayload) => {
-    return null;
+export const getExistingBreed = async ({
+    breedEng,
+    creatorId,
+}: TGetBreedPayload) => {
+    try {
+        validationSchema.dog.parse({
+            breed: breedEng,
+        });
+
+        return await prisma.dog.findUnique({
+            where: { breedEng_creatorId: { breedEng, creatorId } },
+        });
+    } catch (error) {
+        const errors = formatErrors(error).messages;
+        throw new Error(errors.join(errors[0]));
+    }
 };
 
 export const generateBreedResponse = async (
-    values: TNewDogPayload,
+    values: TGenerateBreedPayload,
 ): Promise<TDog | null> => {
     try {
         validationSchema.dog.parse(values);
@@ -56,7 +77,7 @@ export const generateBreedResponse = async (
             return null;
         }
 
-        const data: TNewDogResponse = JSON.parse(
+        const data: TGenerateBreedResponse = JSON.parse(
             response.choices[0].message.content,
         );
 
@@ -71,6 +92,73 @@ export const generateBreedResponse = async (
     }
 };
 
-export const createNewBreed = async (data: TDog) => {
-    return null;
+export const createNewBreed = async (data: TCreateBreedPayload) => {
+    try {
+        const existingBreed = await prisma.dog.findUnique({
+            where: {
+                breedEng_creatorId: {
+                    breedEng: data.breedEng,
+                    creatorId: data.creatorId,
+                },
+            },
+        });
+
+        if (existingBreed) {
+            return await prisma.dog.update({
+                where: { id: existingBreed.id },
+                data: {
+                    ...data,
+                },
+            });
+        } else {
+            return await prisma.dog.create({
+                data,
+            });
+        }
+    } catch (error) {
+        const errors = formatErrors(error).messages;
+        throw new Error(errors.join(errors[0]));
+    }
+};
+
+export const getAllBreeds = async (
+    creatorId: TDog['creatorId'],
+    options?: {
+        query: string;
+        orderBy: Prisma.SortOrder;
+    },
+) => {
+    const { orderBy, query } = options || { orderBy: 'desc' };
+    try {
+        return await prisma.dog.findMany({
+            where: {
+                creatorId,
+                ...(query && {
+                    OR: [
+                        {
+                            breed: {
+                                contains: query,
+                            },
+                        },
+                        {
+                            breedEng: {
+                                contains: query,
+                            },
+                        },
+                        {
+                            origin: {
+                                contains: query,
+                            },
+                        },
+                    ],
+                }),
+            },
+            orderBy: {
+                breedEng: orderBy,
+            },
+        });
+    } catch (error) {
+        const errors = formatErrors(error).messages;
+        throw new Error(errors.join(errors[0]));
+    }
 };

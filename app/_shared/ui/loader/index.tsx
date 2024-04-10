@@ -20,7 +20,7 @@ export const Loader = ({ size = 'md', type = 'spinner', className }: Props) => {
                     'loading-md': size === 'md',
                     'loading-lg': size === 'lg',
                 },
-                { className },
+                className,
             )}
         />
     );

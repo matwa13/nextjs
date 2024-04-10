@@ -1,21 +1,37 @@
+import { Dog } from '@prisma/client';
+
 export type TDog = {
     breed: string;
-    traits: string[];
+    breedEng: string;
     description: string;
-    history: string;
-    origin: string;
     height: {
         males: string;
         females: string;
     };
+    history: string;
+    language: string;
+    origin: string;
+    traits: string[];
     weight: {
         males: string;
         females: string;
     };
+    createdAt?: Date;
+    updatedAt?: Date;
+    creatorId?: string;
+    id?: string;
 };
 
-export type TNewDogPayload = Pick<TDog, 'breed'>;
+export type TGetBreedPayload = Pick<TDog, 'breedEng'> & {
+    creatorId: Dog['creatorId'];
+};
 
-export type TNewDogResponse = {
+export type TGenerateBreedPayload = Pick<TDog, 'breed'>;
+
+export type TGenerateBreedResponse = {
     dog: TDog | null;
+};
+
+export type TCreateBreedPayload = TDog & {
+    creatorId: Dog['creatorId'];
 };

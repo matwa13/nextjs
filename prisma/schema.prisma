@@ -21,3 +21,23 @@ model Task {
   completed Boolean @default(false)
   creatorId String
 }
+
+model Dog {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  creatorId String
+
+  breed String
+  breedEng String
+  description String @db.Text
+  height Json
+  history String @db.Text
+  image String? @db.Text
+  language String
+  origin String
+  traits Json
+  weight Json
+
+  @@unique([breedEng, creatorId])
+}

@@ -1,13 +1,13 @@
 import { FormEvent } from 'react';
-import { TNewDogPayload } from '@/_entities/dogs/types';
+import { TGenerateBreedPayload } from '@/_entities/dogs/types';
 import { Input, SubmitButton } from '@/_shared/ui';
 
 type Props = {
     isLoading?: boolean;
-    onSubmit: (values: TNewDogPayload) => void;
+    onSubmit: (values: TGenerateBreedPayload) => void;
 };
 
-const fields: TNewDogPayload = {
+const fields: TGenerateBreedPayload = {
     breed: 'breed',
 };
 
@@ -15,7 +15,9 @@ export const SearchForm = ({ onSubmit, isLoading }: Props) => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const values = Object.fromEntries(formData.entries()) as TNewDogPayload;
+        const values = Object.fromEntries(
+            formData.entries(),
+        ) as TGenerateBreedPayload;
         onSubmit(values);
     };
 
