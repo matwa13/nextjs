@@ -48,7 +48,7 @@ export const fetchOrGenerateTokens = async () => {
         }
         const result = await fetchUserTokens();
         if (Number.isInteger(result)) {
-            return result;
+            return Number(result);
         }
         return await generateUserTokens();
     } catch (error) {
