@@ -61,7 +61,7 @@ export const List = ({ onSelect, isLoading, searchValue }: Props) => {
             >
                 {data.map((dog) => (
                     <div
-                        key={dog.breed}
+                        key={dog.breedEng}
                         className={classnames('card bg-base-100 shadow-xl', {
                             'cursor-pointer': !isPreviousData && !isLoading,
                         })}

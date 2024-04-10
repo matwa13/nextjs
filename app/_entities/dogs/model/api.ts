@@ -2,6 +2,7 @@
 
 import { auth } from '@clerk/nextjs';
 import { Prisma } from '@prisma/client';
+import axios from 'axios';
 import {
     TCreateBreedPayload,
     TDog,
@@ -176,5 +177,33 @@ export const getAllBreeds = async (options?: {
     } catch (error) {
         const errors = formatErrors(error).messages;
         throw new Error(errors.join(errors[0]));
+    }
+};
+
+export const generateImage = async (breed: string, useAI = true) => {
+    try {
+        let src;
+        if (useAI) {
+            const response = await openai.images.generate({
+                prompt: `a full length photo of the ${breed}`,
+                n: 1,
+                size: '512x512',
+            });
+            src = response?.data[0]?.url;
+        } else {
+            const { data } = await axios(
+                `https://api.unsplash.com/search/photos?query=${breed}`,
+                {
+                    headers: {
+                        Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}`,
+                    },
+                },
+            );
+            src = data?.results[0]?.urls?.regular;
+        }
+
+        return src;
+    } catch (error) {
+        return null;
     }
 };

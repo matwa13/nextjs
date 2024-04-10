@@ -1,5 +1,6 @@
 import { TDog } from '@/_entities/dogs/types';
 import { Heading, Loader } from '@/_shared/ui';
+import { Image } from './image';
 
 type Props = {
     isLoading?: boolean;
@@ -25,33 +26,34 @@ export const Info = ({ data, onReset, isLoading }: Props) => {
                 <Heading tag="h2" className="grow capitalize">
                     {data.breed}
                 </Heading>
-                <div className="stats stats-vertical mr-auto w-full overflow-visible bg-base-300 text-base-content shadow sm:stats-horizontal sm:w-auto">
-                    <div className="stat">
-                        <div className="stat-title font-bold">Country</div>
-                        <div className="stat-title">{data.origin}</div>
-                    </div>
+                <Image breed={data.breedEng} />
+            </div>
+            <div className="stats stats-vertical mr-auto w-full overflow-visible bg-base-300 text-base-content shadow sm:stats-horizontal sm:w-auto">
+                <div className="stat">
+                    <div className="stat-title font-bold">Country</div>
+                    <div className="stat-title">{data.origin}</div>
+                </div>
 
-                    <div className="stat">
-                        <div className="stat-title font-bold">Weight</div>
-                        <div className="stat-desc text-wrap">
-                            <span className="font-bold">Males: </span>
-                            {data.weight.males}
-                        </div>
-                        <div className="stat-desc text-wrap">
-                            <span className="font-bold">Females: </span>
-                            {data.weight.females}
-                        </div>
+                <div className="stat">
+                    <div className="stat-title font-bold">Weight</div>
+                    <div className="stat-desc text-wrap">
+                        <span className="font-bold">Males: </span>
+                        {data.weight.males}
                     </div>
-                    <div className="stat">
-                        <div className="stat-title font-bold">Height</div>
-                        <div className="stat-desc text-wrap">
-                            <span className="font-bold">Males: </span>
-                            {data.height.males}
-                        </div>
-                        <div className="stat-desc text-wrap">
-                            <span className="font-bold">Females: </span>
-                            {data.height.females}
-                        </div>
+                    <div className="stat-desc text-wrap">
+                        <span className="font-bold">Females: </span>
+                        {data.weight.females}
+                    </div>
+                </div>
+                <div className="stat">
+                    <div className="stat-title font-bold">Height</div>
+                    <div className="stat-desc text-wrap">
+                        <span className="font-bold">Males: </span>
+                        {data.height.males}
+                    </div>
+                    <div className="stat-desc text-wrap">
+                        <span className="font-bold">Females: </span>
+                        {data.height.females}
                     </div>
                 </div>
             </div>
