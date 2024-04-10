@@ -1,7 +1,7 @@
 'use client';
 
 import { useToaster } from 'react-hot-toast/headless';
-import classnames from 'classnames';
+import { cn } from '@/_shared/lib';
 
 export const Notifications = () => {
     const { toasts, handlers } = useToaster();
@@ -26,12 +26,9 @@ export const Notifications = () => {
                         onMouseLeave={endPause}
                         key={toast.id}
                         ref={ref}
-                        className={classnames(
-                            'toast toast-center toast-top z-40 p-0',
-                            {
-                                'pt-2': index === 0,
-                            },
-                        )}
+                        className={cn('toast toast-center toast-top z-40 p-0', {
+                            'pt-2': index === 0,
+                        })}
                         style={{
                             transition: 'all 0.5s ease-out',
                             opacity: toast.visible ? 1 : 0,
@@ -40,7 +37,7 @@ export const Notifications = () => {
                         {...toast.ariaProps}
                     >
                         <div
-                            className={classnames('alert', {
+                            className={cn('alert', {
                                 'alert-success': toast.type === 'success',
                                 'alert-error': toast.type === 'error',
                                 'alert-warning': toast.type === 'custom',

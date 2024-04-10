@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { InputHTMLAttributes, ReactElement } from 'react';
+import { cn } from '@/_shared/lib';
 
 type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'id'> & {
     label?: string;
@@ -18,7 +18,7 @@ export const Checkbox = ({
             type="checkbox"
             name={name}
             defaultChecked={defaultChecked}
-            className={classnames('checkbox-primary checkbox', className)}
+            className={cn('checkbox-primary checkbox', className)}
             {...otherProps}
         />
     );

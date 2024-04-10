@@ -1,7 +1,7 @@
-import classnames from 'classnames';
 import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
 import { TChatQuery } from '@/_entities/chat/types';
+import { cn } from '@/_shared/lib';
 import { Loader } from '@/_shared/ui';
 import { BotAvatar } from './bot-avatar';
 
@@ -31,7 +31,7 @@ export const Messages = ({ isLoading, messages }: Props) => {
             return (
                 <div
                     key={index}
-                    className={classnames('chat', {
+                    className={cn('chat', {
                         'chat-start': !isUser,
                         'chat-end': isUser,
                     })}
@@ -52,7 +52,7 @@ export const Messages = ({ isLoading, messages }: Props) => {
                     </div>
                     <div className="chat-header">{fullName}</div>
                     <div
-                        className={classnames(
+                        className={cn(
                             'chat-bubble',
                             backgroundColor,
                             textColor,

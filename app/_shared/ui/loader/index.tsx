@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { cn } from '@/_shared/lib';
 
 type Props = {
     size?: 'sm' | 'md' | 'lg';
@@ -9,7 +9,7 @@ type Props = {
 export const Loader = ({ size = 'md', type = 'spinner', className }: Props) => {
     return (
         <span
-            className={classnames(
+            className={cn(
                 'loading',
                 {
                     'loading-dots': type === 'dots',

@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { InputHTMLAttributes, ReactElement } from 'react';
+import { cn } from '@/_shared/lib';
 
 type Props = Omit<
     InputHTMLAttributes<HTMLInputElement>,
@@ -18,7 +18,7 @@ export const Input = ({
             type="text"
             name={name}
             id={name}
-            className={classnames('input input-primary w-full', className)}
+            className={cn('input input-primary w-full', className)}
             placeholder={placeholder}
             required={required}
             autoComplete={'off'}

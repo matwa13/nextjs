@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { ReactNode } from 'react';
+import { cn } from '@/_shared/lib';
 
 type Props = {
     children: ReactNode;
@@ -10,7 +10,7 @@ export const Alert = ({ children, className, type }: Props) => {
     return (
         <div
             role="alert"
-            className={classnames('alert', className, {
+            className={cn('alert', className, {
                 'alert-success': type === 'success',
                 'alert-error': type === 'error',
                 'alert-warning': type === 'warning',

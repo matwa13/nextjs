@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs';
-import classnames from 'classnames';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model';
+import { cn } from '@/_shared/lib';
 import { Alert } from '@/_shared/ui';
 import { DeleteButton } from './delete-button';
 
@@ -26,7 +26,7 @@ export const List = async () => {
                         className="join w-full rounded-lg border border-base-300 bg-base-200 shadow-lg"
                     >
                         <span
-                            className={classnames(
+                            className={cn(
                                 'join-item w-full p-4 text-lg capitalize',
                                 {
                                     'line-through': task.completed,

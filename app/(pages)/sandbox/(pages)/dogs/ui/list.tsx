@@ -2,8 +2,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERIES } from '@/_entities/dogs/constants';
 import { getAllBreeds } from '@/_entities/dogs/model';
 import { TDog } from '@/_entities/dogs/types';
+import { cn } from '@/_shared/lib';
 import { Alert, Heading, Loader } from '@/_shared/ui';
-import classnames from 'classnames';
 
 type Props = {
     onSelect: (data: TDog) => void;
@@ -52,17 +52,14 @@ export const List = ({ onSelect, isLoading, searchValue }: Props) => {
 
         return (
             <div
-                className={classnames(
-                    'grid auto-rows-fr gap-4 md:grid-cols-2',
-                    {
-                        'opacity-50': isPreviousData,
-                    },
-                )}
+                className={cn('grid auto-rows-fr gap-4 md:grid-cols-2', {
+                    'opacity-50': isPreviousData,
+                })}
             >
                 {data.map((dog) => (
                     <div
                         key={dog.breedEng}
-                        className={classnames('card bg-base-100 shadow-xl', {
+                        className={cn('card bg-base-100 shadow-xl', {
                             'cursor-pointer': !isPreviousData && !isLoading,
                         })}
                         onClick={handleSelect(dog as unknown as TDog)}

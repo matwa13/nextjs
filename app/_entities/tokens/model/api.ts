@@ -82,7 +82,7 @@ export const subtractTokens = async (tokens: number) => {
 
 export const updateTokens = async (tokens: number) => {
     try {
-        const { userId } = auth();
+        const { userId, sessionClaims } = auth();
         if (!userId) {
             return null;
         }
@@ -91,7 +91,10 @@ export const updateTokens = async (tokens: number) => {
                 userId,
             },
             data: {
-                tokens,
+                tokens:
+                    sessionClaims?.metadata?.role === 'admin' && tokens === 0
+                        ? 9999
+                        : tokens,
             },
         });
         return result.tokens;

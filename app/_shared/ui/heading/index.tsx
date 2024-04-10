@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { ReactElement } from 'react';
+import { cn } from '@/_shared/lib';
 
 type Props = {
     children: ReactElement | string;
@@ -21,7 +21,7 @@ export const Heading = ({
     tag = 'h1',
     className,
 }: Props): ReactElement => {
-    const classList = classnames(classNames[tag], className);
+    const classList = cn(classNames[tag], className);
 
     const Element = tag;
     return <Element className={classList}>{children}</Element>;
