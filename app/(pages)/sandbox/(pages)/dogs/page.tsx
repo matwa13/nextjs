@@ -3,10 +3,23 @@ import {
     HydrationBoundary,
     QueryClient,
 } from '@tanstack/react-query';
+import { QUERIES } from '@/_entities/dogs/constants';
+import { getAllBreeds } from '@/_entities/dogs/model';
 import { Dogs } from './ui';
 
-export default function DogsPage() {
+export default async function DogsPage() {
     const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery({
+        queryKey: [QUERIES.dogs, ''],
+        queryFn: async () => {
+            const breeds = await getAllBreeds();
+            breeds.forEach((breed) => {
+                queryClient.setQueryData([QUERIES.dog, breed.breedEng], breed);
+            });
+            return breeds;
+        },
+    });
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>

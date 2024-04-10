@@ -1,5 +1,6 @@
 'use server';
 
+import { auth } from '@clerk/nextjs';
 import { Prisma } from '@prisma/client';
 import {
     TCreateBreedPayload,
@@ -15,17 +16,19 @@ import OpenAI from 'openai';
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-export const getExistingBreed = async ({
-    breedEng,
-    creatorId,
-}: TGetBreedPayload) => {
+export const getExistingBreed = async ({ breedEng }: TGetBreedPayload) => {
+    const { userId } = auth();
+    if (!userId) {
+        throw new Error('Unauthorized');
+    }
+
     try {
         validationSchema.dog.parse({
             breed: breedEng,
         });
 
         return await prisma.dog.findUnique({
-            where: { breedEng_creatorId: { breedEng, creatorId } },
+            where: { breedEng_creatorId: { breedEng, creatorId: userId } },
         });
     } catch (error) {
         const errors = formatErrors(error).messages;
@@ -35,7 +38,10 @@ export const getExistingBreed = async ({
 
 export const generateBreedResponse = async (
     values: TGenerateBreedPayload,
-): Promise<TDog | null> => {
+): Promise<Omit<
+    TDog,
+    'id' | 'creatorId' | 'createdAt' | 'updatedAt' | 'image'
+> | null> => {
     try {
         validationSchema.dog.parse(values);
 
@@ -93,12 +99,17 @@ export const generateBreedResponse = async (
 };
 
 export const createNewBreed = async (data: TCreateBreedPayload) => {
+    const { userId } = auth();
+    if (!userId) {
+        throw new Error('Unauthorized');
+    }
+
     try {
         const existingBreed = await prisma.dog.findUnique({
             where: {
                 breedEng_creatorId: {
                     breedEng: data.breedEng,
-                    creatorId: data.creatorId,
+                    creatorId: userId,
                 },
             },
         });
@@ -112,7 +123,10 @@ export const createNewBreed = async (data: TCreateBreedPayload) => {
             });
         } else {
             return await prisma.dog.create({
-                data,
+                data: {
+                    ...data,
+                    creatorId: userId,
+                },
             });
         }
     } catch (error) {
@@ -121,18 +135,20 @@ export const createNewBreed = async (data: TCreateBreedPayload) => {
     }
 };
 
-export const getAllBreeds = async (
-    creatorId: TDog['creatorId'],
-    options?: {
-        query: string;
-        orderBy: Prisma.SortOrder;
-    },
-) => {
-    const { orderBy, query } = options || { orderBy: 'desc' };
+export const getAllBreeds = async (options?: {
+    query?: string;
+    orderBy?: Prisma.SortOrder;
+}) => {
+    const { userId } = auth();
+    const { orderBy, query } = options || { orderBy: 'asc' };
     try {
+        if (!userId) {
+            return [];
+        }
+
         return await prisma.dog.findMany({
             where: {
-                creatorId,
+                creatorId: userId,
                 ...(query && {
                     OR: [
                         {

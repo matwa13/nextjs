@@ -10,7 +10,7 @@ export default function ChatPage() {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className="mx-auto grid h-full max-w-3xl grid-rows-[1fr,auto] p-4">
+            <div className="mx-auto grid h-full w-full max-w-3xl grid-rows-[1fr,auto] overflow-hidden p-4">
                 <Chat />
             </div>
         </HydrationBoundary>

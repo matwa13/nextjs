@@ -1,5 +1,3 @@
-import { Dog } from '@prisma/client';
-
 export type TDog = {
     breed: string;
     breedEng: string;
@@ -8,6 +6,7 @@ export type TDog = {
         males: string;
         females: string;
     };
+    image?: string | null;
     history: string;
     language: string;
     origin: string;
@@ -16,22 +15,24 @@ export type TDog = {
         males: string;
         females: string;
     };
-    createdAt?: Date;
-    updatedAt?: Date;
-    creatorId?: string;
-    id?: string;
+    createdAt: Date;
+    updatedAt: Date;
+    creatorId: string;
+    id: string;
 };
 
-export type TGetBreedPayload = Pick<TDog, 'breedEng'> & {
-    creatorId: Dog['creatorId'];
-};
+export type TGetBreedPayload = Pick<TDog, 'breedEng'>;
 
 export type TGenerateBreedPayload = Pick<TDog, 'breed'>;
 
 export type TGenerateBreedResponse = {
-    dog: TDog | null;
+    dog: Omit<
+        TDog,
+        'id' | 'createdAt' | 'updatedAt' | 'creatorId' | 'image'
+    > | null;
 };
 
-export type TCreateBreedPayload = TDog & {
-    creatorId: Dog['creatorId'];
-};
+export type TCreateBreedPayload = Omit<
+    TDog,
+    'id' | 'createdAt' | 'updatedAt' | 'creatorId' | 'image'
+>;

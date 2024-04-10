@@ -4,9 +4,10 @@ import { Heading, Loader } from '@/_shared/ui';
 type Props = {
     isLoading?: boolean;
     data?: TDog | null;
+    onReset: () => void;
 };
 
-export const Info = ({ data, isLoading }: Props) => {
+export const Info = ({ data, onReset, isLoading }: Props) => {
     if (isLoading) {
         return <Loader size="lg" className="mx-auto my-4" />;
     }
@@ -17,6 +18,9 @@ export const Info = ({ data, isLoading }: Props) => {
 
     return (
         <div className="flex flex-col gap-4 py-8">
+            <button className="btn btn-primary self-start" onClick={onReset}>
+                Back to the List
+            </button>
             <div className="flex flex-col gap-4 sm:flex-row">
                 <Heading tag="h2" className="grow capitalize">
                     {data.breed}

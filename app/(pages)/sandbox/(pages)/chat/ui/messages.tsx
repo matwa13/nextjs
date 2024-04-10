@@ -64,5 +64,5 @@ export const Messages = ({ isLoading, messages }: Props) => {
             );
         });
     };
-    return <div>{renderMessages()}</div>;
+    return <div className="overflow-y-auto">{renderMessages()}</div>;
 };

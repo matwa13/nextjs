@@ -25,14 +25,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <body
                     className={classnames(
                         inter.className,
-                        'flex h-screen flex-col',
+                        'flex h-screen flex-col overflow-hidden',
                     )}
                 >
                     <Providers>
                         <Notifications />
                         <Navbar />
-                        <main className="grid flex-1 overflow-y-auto">
-                            <div className="container mx-auto p-4">
+                        <main className="flex-1 overflow-y-auto p-4">
+                            <div className="container mx-auto h-full">
                                 {children}
                             </div>
                         </main>
