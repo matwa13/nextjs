@@ -1,6 +1,6 @@
 import { TDog } from '@/_entities/dogs/types';
 import { Heading, Loader } from '@/_shared/ui';
-import { Image } from './image';
+import { Avatar } from './avatar';
 
 type Props = {
     isLoading?: boolean;
@@ -26,7 +26,7 @@ export const Info = ({ data, onReset, isLoading }: Props) => {
                 <Heading tag="h2" className="grow capitalize">
                     {data.breed}
                 </Heading>
-                <Image breed={data.breedEng} />
+                <Avatar breed={data.breedEng} />
             </div>
             <div className="stats stats-vertical mr-auto w-full overflow-visible bg-base-300 text-base-content shadow sm:stats-horizontal sm:w-auto">
                 <div className="stat">

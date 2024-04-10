@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import NextImage from 'next/image';
+import Image from 'next/image';
 import { QUERIES } from '@/_entities/dogs/constants';
 import { generateImage } from '@/_entities/dogs/model';
 
@@ -7,7 +7,7 @@ type Props = {
     breed: string;
 };
 
-export const Image = ({ breed }: Props) => {
+export const Avatar = ({ breed }: Props) => {
     const { data: src, isPending } = useQuery({
         queryKey: [QUERIES.dogImage, breed],
         queryFn: async () => {
@@ -22,7 +22,7 @@ export const Image = ({ breed }: Props) => {
             {Boolean(src) ? (
                 <div className="avatar">
                     <div>
-                        <NextImage
+                        <Image
                             src={src}
                             alt={breed}
                             width={256}

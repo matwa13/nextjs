@@ -1,9 +1,9 @@
 'use client';
 
-import cx from 'classnames';
 import { ChangeEvent } from 'react';
 import { Icons } from '@/_shared/ui';
 import { useTheme } from '@/_entities/theme';
+import { cn } from '@/_shared/lib';
 
 type Props = {
     className?: string;
@@ -17,7 +17,7 @@ export const ThemeToggle = ({ className }: Props) => {
     };
 
     return (
-        <label className={cx('swap swap-rotate', className)}>
+        <label className={cn('swap swap-rotate', className)}>
             <input
                 type="checkbox"
                 className="theme-controller"
