@@ -41,3 +41,10 @@ model Dog {
 
   @@unique([breedEng, creatorId])
 }
+
+model Token {
+  userId String @id
+  tokens Int @default (10000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

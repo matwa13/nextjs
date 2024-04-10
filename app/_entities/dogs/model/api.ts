@@ -39,10 +39,10 @@ export const getExistingBreed = async ({ breedEng }: TGetBreedPayload) => {
 
 export const generateBreedResponse = async (
     values: TGenerateBreedPayload,
-): Promise<Omit<
-    TDog,
-    'id' | 'creatorId' | 'createdAt' | 'updatedAt' | 'image'
-> | null> => {
+): Promise<{
+    data: Omit<TDog, 'id' | 'creatorId' | 'createdAt' | 'updatedAt' | 'image'>;
+    tokens: number;
+} | null> => {
     try {
         validationSchema.dog.parse(values);
 
@@ -92,7 +92,10 @@ export const generateBreedResponse = async (
             return null;
         }
 
-        return data.dog;
+        return {
+            data: data.dog,
+            tokens: response.usage?.total_tokens ?? 0,
+        };
     } catch (error) {
         const errors = formatErrors(error).messages;
         throw new Error(errors.join(errors[0]));

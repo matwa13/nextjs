@@ -10,11 +10,14 @@ import {
     getExistingBreed,
 } from '@/_entities/dogs/model';
 import { notification } from '@/_entities/notifications';
+import { useTokens, useTokensActions } from '@/_entities/tokens';
 import { Info } from './info';
 import { SearchForm } from './search-form';
 import { List } from './list';
 
 export const Dogs = () => {
+    const { tokens } = useTokens();
+    const { decreaseTokens } = useTokensActions();
     const queryClient = useQueryClient();
     const [breedInfo, setBreedInfo] = useState<TDog | null>(null);
     const [searchValue, setSearchValue] = useState<string>('');
@@ -23,7 +26,10 @@ export const Dogs = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: async (
             values: TGenerateBreedPayload,
-        ): Promise<TDog | null> => {
+        ): Promise<{
+            data: TDog | null;
+            tokens: number | null;
+        }> => {
             const breed = values.breed.toLowerCase();
             let existingBreed: TDog | null = null;
             const cachedBreed = queryClient.getQueryData<TDog>([
@@ -31,7 +37,10 @@ export const Dogs = () => {
                 breed,
             ]);
             if (cachedBreed) {
-                return cachedBreed;
+                return {
+                    data: cachedBreed,
+                    tokens: null,
+                };
             }
             const response = await getExistingBreed({
                 breedEng: breed,
@@ -48,18 +57,28 @@ export const Dogs = () => {
             }
 
             if (Boolean(existingBreed)) {
-                return existingBreed;
+                return {
+                    data: existingBreed,
+                    tokens: null,
+                };
             }
 
-            const generatedBreed = await generateBreedResponse({
+            if (!tokens || tokens <= 0) {
+                throw new Error('Token balance too low...');
+            }
+
+            const generatedBreedData = await generateBreedResponse({
                 breed,
             });
 
-            if (!generatedBreed) {
-                return null;
+            if (!generatedBreedData) {
+                return {
+                    data: null,
+                    tokens: null,
+                };
             }
 
-            const { breedEng, ...rest } = generatedBreed;
+            const { breedEng, ...rest } = generatedBreedData.data;
 
             const data = {
                 ...rest,
@@ -67,20 +86,26 @@ export const Dogs = () => {
             };
 
             const newBreed = await createNewBreed(data);
-            return newBreed as unknown as TDog;
+            return {
+                data: newBreed as unknown as TDog,
+                tokens: generatedBreedData.tokens,
+            };
         },
         onError: (error) => {
-            notification.error([error.message]);
+            notification.error(error.message);
             setBreedInfo(null);
         },
-        onSuccess: (data) => {
+        onSuccess: ({ data, tokens }) => {
             if (!data) {
-                notification.info([
+                notification.info(
                     'No breed found, make sure to enter a valid breed and try again',
-                ]);
+                );
                 return;
             }
 
+            if (tokens) {
+                decreaseTokens(tokens);
+            }
             queryClient.invalidateQueries({
                 queryKey: [QUERIES.dogs],
             });

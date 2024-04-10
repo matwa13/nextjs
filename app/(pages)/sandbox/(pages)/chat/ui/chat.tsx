@@ -7,13 +7,20 @@ import { Messages } from './messages';
 import { generateChatResponse } from '@/_entities/chat/model';
 import { TChatQuery } from '@/_entities/chat/types';
 import { notification } from '@/_entities/notifications';
+import { useTokens, useTokensActions } from '@/_entities/tokens';
 
 export const Chat = () => {
+    const { tokens } = useTokens();
+    const { decreaseTokens } = useTokensActions();
     const [messages, setMessages] = useState<TChatQuery[]>([]);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: (query: TChatQuery) =>
-            generateChatResponse([...messages, query]),
+        mutationFn: (query: TChatQuery) => {
+            if (!tokens || tokens <= 0) {
+                throw new Error('Token balance too low...');
+            }
+            return generateChatResponse([...messages, query], Number(tokens));
+        },
     });
 
     const addMessage = (message: TChatQuery) => {
@@ -28,10 +35,12 @@ export const Chat = () => {
                 if (!data) {
                     return;
                 }
-                addMessage(data);
+
+                decreaseTokens(data.tokens);
+                addMessage(data.message);
             },
-            onError: () => {
-                notification.error(['Something went wrong!!!']);
+            onError: (error) => {
+                notification.error(error.message);
             },
         });
     };
