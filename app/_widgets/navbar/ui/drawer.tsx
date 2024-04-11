@@ -1,3 +1,7 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
     Drawer as DrawerPrimitive,
     DrawerClose,
@@ -7,9 +11,11 @@ import {
     Icons,
 } from '@/_shared/ui';
 import { ROUTES, Route, TRoute } from '@/_entities/navigation';
-import Link from 'next/link';
+import { cn } from '@/_shared/lib';
 
 export const Drawer = () => {
+    const pathname = usePathname();
+
     const renderItems = () => {
         const generateList = (routes: Partial<Record<Route, TRoute>>) => {
             return Object.values(routes).map((config) => {
@@ -19,7 +25,14 @@ export const Drawer = () => {
                 return (
                     <li key={config.path}>
                         <DrawerClose asChild>
-                            <Link href={config.path}>{config.label}</Link>
+                            <Link
+                                href={config.path}
+                                className={cn({
+                                    active: pathname === config.path,
+                                })}
+                            >
+                                {config.label}
+                            </Link>
                         </DrawerClose>
                         {config.children ? (
                             <ul>{generateList(config.children)}</ul>
