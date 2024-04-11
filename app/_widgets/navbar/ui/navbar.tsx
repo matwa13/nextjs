@@ -36,7 +36,7 @@ export const Navbar = (): ReactElement => {
                     </Button>
                 </div>
                 <div className="flex-none">
-                    <ul className="menu menu-horizontal px-4">
+                    <ul className="menu menu-horizontal hidden px-4 sm:flex">
                         {renderNavItems()}
                     </ul>
                     <TokensCounter />

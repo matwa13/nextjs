@@ -11,7 +11,7 @@ export default function Home() {
                 <Image
                     src={image.src}
                     alt="Marley"
-                    className="max-w-xs rounded-lg shadow-2xl"
+                    className="max-w-full max-w-xs rounded-lg shadow-2xl"
                     width={320}
                     height={427}
                 />
