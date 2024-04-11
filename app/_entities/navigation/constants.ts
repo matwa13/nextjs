@@ -38,6 +38,36 @@ export const ROUTES: TRoutes = {
     [Route.Sandbox]: {
         path: PATHS[Route.Sandbox],
         label: 'Sandbox',
+        children: {
+            [Route.TodoList]: {
+                path: PATHS[Route.TodoList],
+                label: 'Todo List',
+            },
+            [Route.Chat]: {
+                path: PATHS[Route.Chat],
+                label: 'MaxGPT',
+            },
+            [Route.Dogs]: {
+                path: PATHS[Route.Dogs],
+                label: 'Dogs',
+            },
+            [Route.Projects]: {
+                path: PATHS[Route.Projects],
+                label: 'Projects',
+                children: {
+                    [Route.CreateProject]: {
+                        path: PATHS[Route.CreateProject],
+                        label: 'Create Project',
+                        shouldHideInNav: true,
+                    },
+                    [Route.EditProject]: {
+                        path: PATHS[Route.EditProject],
+                        label: 'Edit Project',
+                        shouldHideInNav: true,
+                    },
+                },
+            },
+        },
     },
     [Route.About]: {
         path: PATHS[Route.About],
@@ -46,36 +76,6 @@ export const ROUTES: TRoutes = {
     [Route.Contact]: {
         path: PATHS[Route.Contact],
         label: 'Contact',
-    },
-    [Route.TodoList]: {
-        path: PATHS[Route.TodoList],
-        label: 'Todo List',
-        shouldHideInNav: true,
-    },
-    [Route.Chat]: {
-        path: PATHS[Route.Chat],
-        label: 'MaxGPT',
-        shouldHideInNav: true,
-    },
-    [Route.Dogs]: {
-        path: PATHS[Route.Dogs],
-        label: 'Dogs',
-        shouldHideInNav: true,
-    },
-    [Route.Projects]: {
-        path: PATHS[Route.Projects],
-        label: 'Projects',
-        shouldHideInNav: true,
-    },
-    [Route.CreateProject]: {
-        path: PATHS[Route.CreateProject],
-        label: 'Create Project',
-        shouldHideInNav: true,
-    },
-    [Route.EditProject]: {
-        path: PATHS[Route.EditProject],
-        label: 'Edit Project',
-        shouldHideInNav: true,
     },
     [Route.SignIn]: {
         path: PATHS[Route.SignIn],

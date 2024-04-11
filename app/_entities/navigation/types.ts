@@ -4,6 +4,7 @@ export type TRoute = {
     path: (typeof PATHS)[keyof typeof PATHS];
     label: string;
     shouldHideInNav?: boolean;
+    children?: TRoutes;
 };
 
-export type TRoutes = Record<Route, TRoute>;
+export type TRoutes = Partial<Record<Route, TRoute>>;

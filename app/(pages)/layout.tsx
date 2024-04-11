@@ -21,21 +21,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
             <html lang="en" suppressHydrationWarning>
-                <body
-                    className={cn(
-                        inter.className,
-                        'flex h-screen flex-col overflow-hidden',
-                    )}
-                >
+                <body className={cn(inter.className)}>
                     <Providers>
-                        <Notifications />
-                        <Navbar />
-                        <main className="flex-1 overflow-y-auto p-4">
-                            <div className="container mx-auto h-full">
-                                {children}
-                            </div>
-                        </main>
-                        <Footer />
+                        <div className="flex h-screen flex-col overflow-hidden">
+                            <Notifications />
+                            <Navbar />
+                            <main className="flex-1 overflow-y-auto p-4">
+                                <div className="container mx-auto h-full">
+                                    {children}
+                                </div>
+                            </main>
+                            <Footer />
+                        </div>
                     </Providers>
                 </body>
             </html>

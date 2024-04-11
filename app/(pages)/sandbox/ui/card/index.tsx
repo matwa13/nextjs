@@ -1,5 +1,5 @@
-import { Button, Heading } from '@/_shared/ui';
-import { TRoute } from '@/_entities/navigation';
+import { Heading } from '@/_shared/ui';
+import { PATHS } from '@/_entities/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -7,13 +7,12 @@ type Props = {
     src: string;
     title: string;
     description?: string;
-    route: TRoute;
+    route: (typeof PATHS)[keyof typeof PATHS];
 };
 
 export const Card = ({ src, title, description, route }: Props) => {
-    const { label, path } = route;
     return (
-        <div className="card image-full w-full bg-base-100 shadow-xl">
+        <div className="card image-full relative w-full bg-base-100 shadow-xl">
             <figure className="relative">
                 <Image
                     src={src}
@@ -28,12 +27,10 @@ export const Card = ({ src, title, description, route }: Props) => {
                     {title}
                 </Heading>
                 {Boolean(description) && <p>{description}</p>}
-                <div className="card-actions justify-end">
-                    <Button asChild>
-                        <Link href={path}>{label}</Link>
-                    </Button>
-                </div>
             </div>
+            <Link href={route} className="absolute inset-0 z-30 opacity-0">
+                {title}
+            </Link>
         </div>
     );
 };

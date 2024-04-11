@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import { PATHS, Route, ROUTES } from '@/_entities/navigation';
+import { PATHS, Route, ROUTES, TRoute } from '@/_entities/navigation';
 
 export const Breadcrumbs = () => {
     const pathname = usePathname();
@@ -23,10 +23,26 @@ export const Breadcrumbs = () => {
     }
 
     const renderBreadcrumbs = () => {
+        const findRoute = (
+            routes: Partial<Record<Route, TRoute>>,
+            path: (typeof PATHS)[keyof typeof PATHS],
+        ) => {
+            return Object.values(routes).find((config) => config.path === path);
+        };
         return routes.map((route, index) => {
-            const routeConfig = Object.values(ROUTES).find(
-                (config) => config.path === route,
-            );
+            let routeConfig = findRoute(ROUTES, route);
+            if (!routeConfig) {
+                if (!index) {
+                    return null;
+                }
+                const prevRoute = routes[index - 1];
+                const prevRouteConfig = findRoute(ROUTES, prevRoute);
+                if (!prevRouteConfig || !prevRouteConfig.children) {
+                    return null;
+                }
+                routeConfig = findRoute(prevRouteConfig.children, route);
+            }
+
             if (!routeConfig) {
                 return null;
             }
@@ -48,7 +64,7 @@ export const Breadcrumbs = () => {
             <ul>
                 <li>
                     <Link href={PATHS[Route.Home]}>
-                        {ROUTES[Route.Home].label}
+                        {ROUTES[Route.Home]!.label}
                     </Link>
                 </li>
                 {renderBreadcrumbs()}
