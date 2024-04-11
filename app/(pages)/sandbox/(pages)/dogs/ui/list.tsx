@@ -3,7 +3,7 @@ import { QUERIES } from '@/_entities/dogs/constants';
 import { getAllBreeds } from '@/_entities/dogs/model';
 import { TDog } from '@/_entities/dogs/types';
 import { cn } from '@/_shared/lib';
-import { Alert, Heading, Loader } from '@/_shared/ui';
+import { Alert, Card, Loader } from '@/_shared/ui';
 
 type Props = {
     onSelect: (data: TDog) => void;
@@ -57,20 +57,15 @@ export const List = ({ onSelect, isLoading, searchValue }: Props) => {
                 })}
             >
                 {data.map((dog) => (
-                    <div
+                    <Card
+                        title={dog.breed}
                         key={dog.breedEng}
-                        className={cn('card bg-base-100 shadow-xl', {
+                        description={dog.description}
+                        onClick={handleSelect(dog as unknown as TDog)}
+                        className={cn({
                             'cursor-pointer': !isPreviousData && !isLoading,
                         })}
-                        onClick={handleSelect(dog as unknown as TDog)}
-                    >
-                        <div className="card-body">
-                            <Heading tag="h2" className="card-title capitalize">
-                                {dog.breed}
-                            </Heading>
-                            <p>{dog.description}</p>
-                        </div>
-                    </div>
+                    />
                 ))}
             </div>
         );
