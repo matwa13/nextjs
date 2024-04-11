@@ -8,6 +8,9 @@ export enum Route {
     TodoList = 'TodoList',
     Chat = 'Chat',
     Dogs = 'Dogs',
+    Projects = 'Projects',
+    CreateProject = 'CreateProject',
+    EditProject = 'EditProject',
     SignIn = 'SignIn',
     SignUp = 'SignUp',
 }
@@ -20,6 +23,9 @@ export const PATHS: Record<Route, string> = {
     [Route.TodoList]: '/sandbox/todo-list',
     [Route.Chat]: '/sandbox/chat',
     [Route.Dogs]: '/sandbox/dogs',
+    [Route.Projects]: '/sandbox/projects',
+    [Route.CreateProject]: '/sandbox/projects/create',
+    [Route.EditProject]: '/sandbox/projects/:id',
     [Route.SignIn]: '/sign-in',
     [Route.SignUp]: '/sign-up',
 };
@@ -54,6 +60,21 @@ export const ROUTES: TRoutes = {
     [Route.Dogs]: {
         path: PATHS[Route.Dogs],
         label: 'Dogs',
+        shouldHideInNav: true,
+    },
+    [Route.Projects]: {
+        path: PATHS[Route.Projects],
+        label: 'Projects',
+        shouldHideInNav: true,
+    },
+    [Route.CreateProject]: {
+        path: PATHS[Route.CreateProject],
+        label: 'Create Project',
+        shouldHideInNav: true,
+    },
+    [Route.EditProject]: {
+        path: PATHS[Route.EditProject],
+        label: 'Edit Project',
         shouldHideInNav: true,
     },
     [Route.SignIn]: {

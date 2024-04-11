@@ -24,4 +24,11 @@ export const cards: ComponentProps<typeof Card>[] = [
             'The AI Dogs Guide is a valuable tool for accessing detailed information about different dog breeds from the internet, providing dog owners with essential insights to better understand and care for their furry companions.',
         route: ROUTES[Route.Dogs],
     },
+    {
+        src: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg',
+        title: 'Manage Your Projects!',
+        description:
+            "Add new projects or edit existing ones with ease! Whether it's showcasing your latest work or updating project details, this feature puts you in control. Stay organized and keep your portfolio up-to-date effortlessly, ensuring that your achievements are always presented accurately and attractively.",
+        route: ROUTES[Route.Projects],
+    },
 ];
