@@ -1,5 +1,5 @@
 import { TDog } from '@/_entities/dogs/types';
-import { Heading, Loader } from '@/_shared/ui';
+import { Button, Heading, Loader } from '@/_shared/ui';
 import { Avatar } from './avatar';
 
 type Props = {
@@ -19,9 +19,9 @@ export const Info = ({ data, onReset, isLoading }: Props) => {
 
     return (
         <div className="flex flex-col gap-4 py-8">
-            <button className="btn btn-primary self-start" onClick={onReset}>
+            <Button className="self-start" onClick={onReset}>
                 Back to the List
-            </button>
+            </Button>
             <div className="flex flex-col gap-4 sm:flex-row">
                 <Heading tag="h2" className="grow capitalize">
                     {data.breed}

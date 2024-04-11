@@ -1,5 +1,6 @@
-export { Alert } from './alert';
+export * from './alert';
+export * from './button';
 export * from './form';
-export { Heading } from './heading';
+export * from './heading';
 export * from './icons';
-export { Loader } from './loader';
+export * from './loader';

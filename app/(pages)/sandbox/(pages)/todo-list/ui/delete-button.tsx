@@ -26,7 +26,7 @@ export const DeleteButton = ({ id }: Props) => {
     return (
         <form action={formAction}>
             <input type="hidden" name="id" value={id} />
-            <SubmitButton className="btn-secondary join-item h-full w-16">
+            <SubmitButton variant="secondary" className="join-item h-full w-16">
                 delete
             </SubmitButton>
         </form>

@@ -1,4 +1,4 @@
-import { Heading } from '@/_shared/ui';
+import { Button, Heading } from '@/_shared/ui';
 import { TRoute } from '@/_entities/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -29,9 +29,9 @@ export const Card = ({ src, title, description, route }: Props) => {
                 </Heading>
                 {Boolean(description) && <p>{description}</p>}
                 <div className="card-actions justify-end">
-                    <Link href={path} className="btn btn-primary">
-                        {label}
-                    </Link>
+                    <Button asChild>
+                        <Link href={path}>{label}</Link>
+                    </Button>
                 </div>
             </div>
         </div>

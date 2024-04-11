@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model';
 import { cn } from '@/_shared/lib';
-import { Alert } from '@/_shared/ui';
+import { Alert, Button } from '@/_shared/ui';
 import { DeleteButton } from './delete-button';
 
 export const List = async () => {
@@ -35,12 +35,11 @@ export const List = async () => {
                         >
                             {task.content}
                         </span>
-                        <Link
-                            href={`${PATHS[Route.TodoList]}/${task.id}`}
-                            className="btn btn-primary join-item h-auto w-16"
-                        >
-                            edit
-                        </Link>
+                        <Button asChild className="join-item h-auto w-16">
+                            <Link href={`${PATHS[Route.TodoList]}/${task.id}`}>
+                                edit
+                            </Link>
+                        </Button>
                         <DeleteButton id={task.id} />
                     </li>
                 ))}

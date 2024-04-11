@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PATHS, Route } from '@/_entities/navigation';
-import { Heading } from '@/_shared/ui';
+import { Heading, Button } from '@/_shared/ui';
 import image from './ui/image.jpeg';
 
 export default function Home() {
@@ -31,12 +31,11 @@ export default function Home() {
                         and discover how AI is shaping the future of web
                         development.
                     </p>
-                    <Link
-                        href={PATHS[Route.Sandbox]}
-                        className="btn btn-primary btn-lg"
-                    >
-                        Click to Explore
-                    </Link>
+                    <Button size="lg" asChild>
+                        <Link href={PATHS[Route.Sandbox]}>
+                            Click to Explore
+                        </Link>
+                    </Button>
                 </div>
             </div>
         </div>
