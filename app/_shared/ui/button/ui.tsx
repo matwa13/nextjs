@@ -19,6 +19,7 @@ const buttonVariants = cva('btn', {
             ghost: 'btn-ghost',
             link: 'btn-link',
             outline: 'btn-outline',
+            glass: 'glass',
         },
         size: {
             default: 'btn-md',

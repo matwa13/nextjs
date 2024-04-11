@@ -5,7 +5,7 @@ import { Heading } from '@/_shared/ui';
 
 type Props = {
     image?: Omit<ComponentProps<typeof Image>, 'alt'> & { alt?: string };
-    title: string;
+    title?: string;
     description?: string;
     className?: string;
 } & HTMLAttributes<HTMLDivElement>;
@@ -20,22 +20,27 @@ export const Card = ({
 }: Props) => {
     return (
         <div
-            className={cn('card relative w-full bg-base-100 shadow-xl', {
-                'image-full': Boolean(image),
+            className={cn(
+                'card relative w-full bg-base-100 shadow-xl',
+                {
+                    'image-full': Boolean(image),
+                },
                 className,
-            })}
+            )}
             {...divProps}
         >
             {image ? (
                 <figure className="relative">
-                    <Image {...image} alt={image.alt ?? title} />
+                    <Image {...image} alt={image.alt ?? title ?? ''} />
                 </figure>
             ) : null}
 
             <div className="card-body justify-between">
-                <Heading tag="h2" className="card-title capitalize">
-                    {title}
-                </Heading>
+                {title ? (
+                    <Heading tag="h2" className="card-title capitalize">
+                        {title}
+                    </Heading>
+                ) : null}
                 {Boolean(description) && <p>{description}</p>}
                 {children}
             </div>

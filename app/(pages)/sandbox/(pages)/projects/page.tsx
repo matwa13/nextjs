@@ -1,7 +1,5 @@
+import { Projects } from './ui';
+
 export default function ProjectsPage() {
-    return (
-        <>
-            <h1>ProjectsPage</h1>
-        </>
-    );
+    return <Projects />;
 }

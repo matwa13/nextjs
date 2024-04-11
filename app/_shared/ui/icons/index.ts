@@ -6,6 +6,7 @@ import {
     PaperAirplaneIcon,
     Bars4Icon,
     XMarkIcon,
+    PlusIcon,
 } from '@heroicons/react/24/outline';
 
 import { EmailIcon, LinkedinIcon, WhatsappIcon } from 'react-share';
@@ -21,4 +22,5 @@ export const Icons = {
     PaperAirplane: PaperAirplaneIcon,
     Menu: Bars4Icon,
     Close: XMarkIcon,
+    Plus: PlusIcon,
 };
