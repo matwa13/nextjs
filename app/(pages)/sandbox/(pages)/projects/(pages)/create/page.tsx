@@ -1,7 +1,5 @@
+import { CreateForm } from './ui';
+
 export default function CreateNewProjectPage() {
-    return (
-        <>
-            <h1>CreateNewProjectPage</h1>
-        </>
-    );
+    return <CreateForm />;
 }

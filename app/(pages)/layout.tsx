@@ -21,13 +21,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
             <html lang="en" suppressHydrationWarning>
-                <body className={cn(inter.className)}>
+                <body className={(cn(inter.className), 'overflow-hidden')}>
                     <Providers>
-                        <div className="flex h-screen flex-col overflow-hidden">
+                        <div className="flex h-screen flex-col">
                             <Notifications />
                             <Navbar />
                             <main className="flex-1 overflow-y-auto p-4">
-                                <div className="container mx-auto h-full">
+                                <div className="container mx-auto h-full py-4 md:py-8">
                                     {children}
                                 </div>
                             </main>
