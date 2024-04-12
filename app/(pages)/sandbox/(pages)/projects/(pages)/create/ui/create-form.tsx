@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Form, FormField, Button, Textarea } from '@/_shared/ui';
 import { validationSchema } from '@/_entities/projects/model';
 import { TFormValues } from '@/_entities/projects/types';
+import { TechStackInput } from './tech-stack-input';
 
 export const CreateForm = () => {
     const form = useForm<TFormValues>({
@@ -51,6 +52,7 @@ export const CreateForm = () => {
                     control={form.control}
                     name="techStack"
                     label="Tech Stack"
+                    tag={TechStackInput}
                     description="List the technologies or tools used in the project (required)"
                 />
                 <FormField
