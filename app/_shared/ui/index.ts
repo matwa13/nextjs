@@ -1,4 +1,5 @@
 export * from './alert';
+export * from './back-button';
 export * from './button';
 export * from './card';
 export * from './checkbox';

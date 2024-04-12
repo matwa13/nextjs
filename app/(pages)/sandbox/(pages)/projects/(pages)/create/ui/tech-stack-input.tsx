@@ -99,7 +99,7 @@ const TechStackInput = forwardRef<HTMLInputElement, PropsWithoutRef<Props>>(
                     <Input
                         ref={ref}
                         value={value}
-                        placeholder="placeholder"
+                        placeholder="Enter a value or values separated by comma and press Enter or Add button"
                         className="join-item"
                         onChange={handleChange}
                         disabled={disabled}

@@ -23,6 +23,7 @@ export const FormField = <
     control,
     label,
     description,
+    className,
     tag: Tag = Input,
     ...props
 }: Omit<ControllerProps<TFieldValues, TName>, 'render'> & {
@@ -30,6 +31,7 @@ export const FormField = <
     label?: ReactNode;
     tag?: JSXElementConstructor<any>;
     description?: ReactNode;
+    className?: string;
 }) => {
     return (
         <FormFieldContext.Provider value={{ name }}>
@@ -37,7 +39,7 @@ export const FormField = <
                 control={control}
                 name={name}
                 render={({ field, fieldState, formState }) => (
-                    <FormItem>
+                    <FormItem className={className}>
                         {label ? <FormLabel>{label}</FormLabel> : null}
                         <FormControl>
                             {render ? (
