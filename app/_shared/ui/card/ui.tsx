@@ -37,7 +37,10 @@ export const Card = ({
 
             <div className="card-body justify-between">
                 {title ? (
-                    <Heading tag="h2" className="card-title capitalize">
+                    <Heading
+                        tag="h2"
+                        className="card-title hyphens-auto break-all capitalize"
+                    >
                         {title}
                     </Heading>
                 ) : null}

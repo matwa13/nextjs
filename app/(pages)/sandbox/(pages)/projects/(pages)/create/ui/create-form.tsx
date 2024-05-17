@@ -36,12 +36,11 @@ export const CreateForm = () => {
         mutationFn: async (values: TFormValues) => {
             return createProject(values);
         },
-        onSuccess: (project) => {
+        onSuccess: async (project) => {
+            await queryClient.invalidateQueries({
+                queryKey: [QUERIES.projects],
+            });
             queryClient.setQueryData([QUERIES.project, project.id], project);
-            queryClient.setQueryData(
-                [QUERIES.projects],
-                (data: TProject[] = []) => [...data, project],
-            );
             notification.success(
                 `${project.name} Project created successfully`,
             );

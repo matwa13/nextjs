@@ -1,10 +1,43 @@
-import { Button, Card, Icons } from '@/_shared/ui';
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { PATHS } from '@/_entities/navigation';
+import { notification } from '@/_entities/notifications';
+import { getProjects, QUERIES } from '@/_entities/projects';
+import { Button, Card, Icons } from '@/_shared/ui';
+import { ProjectCard } from './project-card';
 
 export const Projects = () => {
+    const { data, isPending, isError } = useQuery({
+        queryKey: [QUERIES.projects],
+        queryFn: () => getProjects(),
+    });
+
+    useEffect(() => {
+        if (!isError) {
+            return;
+        }
+
+        notification.error('Failed to load projects');
+    }, [isError]);
+
+    const renderContent = () => {
+        if (isPending) {
+            return <div className="skeleton"></div>;
+        }
+
+        if (data?.length) {
+            return data.map((project) => (
+                <ProjectCard project={project} key={project.id} />
+            ));
+        }
+    };
+
     return (
         <div className="grid auto-rows-fr gap-2 sm:grid-cols-2 xl:grid-cols-3 xl:gap-4">
+            {renderContent()}
             <Card
                 className="min-h-52"
                 image={{
