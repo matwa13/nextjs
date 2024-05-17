@@ -42,7 +42,7 @@ export const SearchForm = ({ onSubmit, onChange, isLoading }: Props) => {
                 />
                 <SubmitButton
                     className="join-item min-w-40"
-                    disabled={isLoading}
+                    disabled={isLoading || !value}
                 >
                     Ask AI for breed info or choose an existing breed in the
                     list
