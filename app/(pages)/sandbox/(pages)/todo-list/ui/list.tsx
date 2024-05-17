@@ -1,6 +1,5 @@
-import { auth } from '@clerk/nextjs';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { getUserId } from '@/_entities/auth';
 import { PATHS, Route } from '@/_entities/navigation';
 import { getTasks } from '@/_entities/tasks/model';
 import { cn } from '@/_shared/lib';
@@ -8,10 +7,7 @@ import { Alert, Button } from '@/_shared/ui';
 import { DeleteButton } from './delete-button';
 
 export const List = async () => {
-    const { userId } = auth();
-    if (!userId) {
-        redirect(PATHS[Route.SignIn]);
-    }
+    const userId = getUserId();
     const tasks = await getTasks(userId);
     const renderContent = () => {
         if (!tasks.length) {

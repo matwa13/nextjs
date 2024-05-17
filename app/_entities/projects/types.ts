@@ -10,8 +10,8 @@ export type TProject = {
     creatorId: string;
     name: string;
     description: string;
-    teamInvolvement: string;
+    teamInvolvement?: string | null;
     techStack: string[];
-    domain: string;
+    domain?: string | null;
     role: string;
 };

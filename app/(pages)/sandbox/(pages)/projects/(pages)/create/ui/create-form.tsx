@@ -1,14 +1,25 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
+import { PATHS, Route } from '@/_entities/navigation';
+import { notification } from '@/_entities/notifications';
+import {
+    createProject,
+    QUERIES,
+    TProject,
+    validationSchema,
+    TFormValues,
+} from '@/_entities/projects';
 import { Form, FormField, Button, Textarea } from '@/_shared/ui';
-import { validationSchema } from '@/_entities/projects/model';
-import { TFormValues } from '@/_entities/projects/types';
 import { TechStackInput } from './tech-stack-input';
 
 export const CreateForm = () => {
+    const queryClient = useQueryClient();
+    const { push } = useRouter();
     const form = useForm<TFormValues>({
         resolver: zodResolver(validationSchema),
         defaultValues: {
@@ -21,8 +32,28 @@ export const CreateForm = () => {
         },
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: async (values: TFormValues) => {
+            return createProject(values);
+        },
+        onSuccess: (project) => {
+            queryClient.setQueryData([QUERIES.project, project.id], project);
+            queryClient.setQueryData(
+                [QUERIES.projects],
+                (data: TProject[] = []) => [...data, project],
+            );
+            notification.success(
+                `${project.name} Project created successfully`,
+            );
+            push(PATHS[Route.Projects]);
+        },
+        onError: (error) => {
+            notification.error(error.message);
+        },
+    });
+
     function onSubmit(values: TFormValues) {
-        console.log(values);
+        mutate(values);
     }
 
     return (
@@ -80,6 +111,7 @@ export const CreateForm = () => {
                 <Button
                     type="submit"
                     className="col-span-1 lg:order-7 lg:col-span-3"
+                    disabled={isPending}
                 >
                     Submit
                 </Button>

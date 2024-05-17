@@ -6,7 +6,7 @@ import { useFormNotifications } from '@/_entities/notifications';
 import { updateTask } from '@/_entities/tasks/model';
 import { TResponse } from '@/_shared/types';
 import { Alert, Checkbox, Input, SubmitButton } from '@/_shared/ui';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { PATHS, Route } from '@/_entities/navigation';
 
 type Props = {
@@ -19,6 +19,7 @@ const initialValues: TResponse = {
 };
 
 export const Form = ({ task }: Props) => {
+    const { push } = useRouter();
     const [state, formAction] = useFormState<TResponse, FormData>(
         updateTask,
         initialValues,
@@ -27,7 +28,7 @@ export const Form = ({ task }: Props) => {
     useFormNotifications(state, {
         onSuccess: () => {
             // redirect does not work in server actions https://github.com/vercel/next.js/issues/58263
-            redirect(PATHS[Route.TodoList]);
+            push(PATHS[Route.TodoList]);
         },
     });
 

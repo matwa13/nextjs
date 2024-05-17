@@ -8,7 +8,7 @@ import {
     PropsWithoutRef,
 } from 'react';
 import { notification } from '@/_entities/notifications';
-import { TFormValues } from '@/_entities/projects/types';
+import { TFormValues } from '@/_entities/projects';
 import { Button, Icons, Input } from '@/_shared/ui';
 
 type Props = Parameters<
