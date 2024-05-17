@@ -10,7 +10,7 @@ import {
     TGenerateBreedResponse,
     TGetBreedPayload,
 } from '@/_entities/dogs/types';
-import { formatErrors, prisma } from '@/_shared/lib';
+import { getErrorMessage, prisma } from '@/_shared/lib';
 import { validationSchema } from './validation';
 import OpenAI from 'openai';
 
@@ -32,8 +32,7 @@ export const getExistingBreed = async ({ breedEng }: TGetBreedPayload) => {
             where: { breedEng_creatorId: { breedEng, creatorId: userId } },
         });
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -97,8 +96,7 @@ export const generateBreedResponse = async (
             tokens: response.usage?.total_tokens ?? 0,
         };
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -134,8 +132,7 @@ export const createNewBreed = async (data: TCreateBreedPayload) => {
             });
         }
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -178,8 +175,7 @@ export const getAllBreeds = async (options?: {
             },
         });
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 

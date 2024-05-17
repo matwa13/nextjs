@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@clerk/nextjs';
-import { formatErrors, prisma } from '@/_shared/lib';
+import { getErrorMessage, prisma } from '@/_shared/lib';
 
 export const fetchUserTokens = async () => {
     try {
@@ -17,8 +17,7 @@ export const fetchUserTokens = async () => {
 
         return result?.tokens;
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -35,8 +34,7 @@ export const generateUserTokens = async () => {
         });
         return result?.tokens;
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -52,8 +50,7 @@ export const fetchOrGenerateTokens = async () => {
         }
         return await generateUserTokens();
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -75,8 +72,7 @@ export const subtractTokens = async (tokens: number) => {
         });
         return result.tokens;
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
 
@@ -99,7 +95,6 @@ export const updateTokens = async (tokens: number) => {
         });
         return result.tokens;
     } catch (error) {
-        const errors = formatErrors(error).messages;
-        throw new Error(errors.join(errors[0]));
+        throw new Error(getErrorMessage(error));
     }
 };
