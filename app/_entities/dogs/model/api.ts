@@ -32,7 +32,7 @@ export const getExistingBreed = async ({ breedEng }: TGetBreedPayload) => {
             where: { breedEng_creatorId: { breedEng, creatorId: userId } },
         });
     } catch (error) {
-        throw new Error(getErrorMessage(error));
+        throw new Error(getErrorMessage(error, false));
     }
 };
 
