@@ -6,9 +6,6 @@ import { Input, SubmitButton } from '@/_shared/ui';
 import { useFormNotifications } from '@/_entities/notifications';
 import { TResponse } from '@/_shared/types';
 import { useAuth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
-import { PATHS, Route } from '@/_entities/navigation';
-import { useEffect } from 'react';
 
 const initialValues: TResponse = {
     messages: [],
@@ -23,12 +20,6 @@ export const Form = () => {
     const { userId } = useAuth();
 
     useFormNotifications(state);
-
-    useEffect(() => {
-        if (!userId) {
-            redirect(PATHS[Route.SignIn]);
-        }
-    }, [userId]);
 
     if (!userId) {
         return null;
